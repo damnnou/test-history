@@ -3,23 +3,38 @@ import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 
 interface CircleButtonProps {
-    children: number;
+    width?: string;
+    height?: string;
+    disabled?: boolean;
+    children: React.ReactNode;
 }
 
-const Button = styled.button`
+const Button = styled.button<{
+    width?: string;
+    height?: string;
+    disabled?: boolean;
+}>`
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #f4f5f9;
-    width: 56px;
-    height: 56px;
+    width: ${(props) => props.width ?? "56px"};
+    height: ${(props) => props.height ?? "56px"};
     font-size: 20px;
-    border: 1px solid ${colors["Black-blue-Opacity-50"]};
+    border: 1px solid
+        ${(props) =>
+            props.disabled
+                ? colors["Black-blue-Opacity-20"]
+                : colors["Black-blue-Opacity-50"]};
     border-radius: 50%;
+    color: ${(props) =>
+        props.disabled
+            ? colors["Black-blue-Opacity-50"]
+            : colors["Black-blue"]};
+    cursor: ${(props) => !props.disabled && "pointer"};
 `;
 
 const ButtonInnerText = styled.span`
-    color: ${colors["Black-blue"]};
     font-family: "PT Sans";
     font-size: 20px;
     font-style: normal;
@@ -27,9 +42,9 @@ const ButtonInnerText = styled.span`
     line-height: 30px; /* 150% */
 `;
 
-const CircleButton: React.FC<CircleButtonProps> = ({ children }) => {
+const CircleButton: React.FC<CircleButtonProps> = ({ children, ...props }) => {
     return (
-        <Button>
+        <Button {...props}>
             <ButtonInnerText>{children}</ButtonInnerText>
         </Button>
     );

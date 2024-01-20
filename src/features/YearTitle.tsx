@@ -9,6 +9,9 @@ interface YearTitleProps {
 const Year = styled.h1<{ color?: string }>`
     color: ${(props) => props.color ?? "#5D5FEF"};
 
+    margin: 0 0;
+    height: fit-content;
+    width: fit-content;
     text-align: center;
     font-family: "PT Sans";
     font-size: 200px;
