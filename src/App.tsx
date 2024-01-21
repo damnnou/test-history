@@ -6,6 +6,9 @@ import MainTitle from "./features/MainTitle.tsx";
 import YearsCounter from "./ui/YearsCounter.tsx";
 import SelectCategorySection from "./ui/SelectCategorySection.tsx";
 import StoriesSection from "./ui/StoriesSection.tsx";
+import history from "./api/history.ts";
+import type { HistoryItem } from "./types/historyItem.ts";
+
 const AppWrapper = styled.div`
     position: relative;
     display: flex;
@@ -19,13 +22,26 @@ const AppWrapper = styled.div`
 `;
 
 const App: React.FC = () => {
+    const [stories, setStories] = useState<HistoryItem[]>([]);
+
+    const [fromYear, setFromYear] = useState<number>(2015);
+    const [toYear, setToYear] = useState<number>(2022);
+
+    useEffect(() => {
+        history.getHistory().then((data) => setStories(data));
+    }, []);
+
+    useEffect(() => {
+        console.log(stories);
+    }, [stories]);
+
     return (
         <AppWrapper>
             <MainCircle />
-            <MainTitle margin={"150px"}>Исторические даты</MainTitle>
-            <YearsCounter />
+            <MainTitle>Исторические даты</MainTitle>
+            <YearsCounter fromYear={fromYear} toYear={toYear} />
             <SelectCategorySection />
-            <StoriesSection />
+            <StoriesSection stories={stories} />
         </AppWrapper>
     );
 };

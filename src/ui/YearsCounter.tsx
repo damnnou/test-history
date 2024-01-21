@@ -3,6 +3,11 @@ import YearTitle from "../features/YearTitle.tsx";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 
+interface YearsCounterProps {
+    fromYear: number;
+    toYear: number;
+}
+
 const StyledContainer = styled.div`
     display: flex;
     position: absolute;
@@ -14,11 +19,11 @@ const StyledContainer = styled.div`
     transform: translateX(-50%);
 `;
 
-const YearsCounter: React.FC = () => {
+const YearsCounter: React.FC<YearsCounterProps> = ({ fromYear, toYear }) => {
     return (
         <StyledContainer>
-            <YearTitle color={colors["Iris-100"]}>{2015}</YearTitle>
-            <YearTitle color={colors["Fuschia-100"]}>{2022}</YearTitle>
+            <YearTitle color={colors["Iris-100"]}>{fromYear}</YearTitle>
+            <YearTitle color={colors["Fuschia-100"]}>{toYear}</YearTitle>
         </StyledContainer>
     );
 };

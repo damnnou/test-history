@@ -5,12 +5,17 @@ import { colors } from "../styles/colors.ts";
 import history from "../api/history.ts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
+import type { HistoryItem } from "../types/historyItem.ts";
+
+interface StoriesSectionProps {
+    stories: HistoryItem[];
+}
 
 const Section = styled.section`
     display: flex;
     align-items: center;
-    max-width: 1440px; // Ограничение ширины
-    overflow: hidden; // Добавление скрытия, чтобы предотвратить появление горизонтального скролла
+    max-width: 1440px;
+    overflow: hidden;
     justify-content: space-between;
     margin-top: 56px;
     padding-right: 40px;
@@ -34,11 +39,10 @@ const Eclipse = styled.button<{ visible: boolean }>`
     color: ${colors.Blue};
 `;
 
-const StoriesSection = () => {
+const StoriesSection: React.FC<StoriesSectionProps> = ({ stories }) => {
     const [swiper, setSwiper] = useState(null);
-
-    const [prevButton, setPrevButton] = useState(false);
-    const [nextButton, setNextButton] = useState(true);
+    const [prevButton, setPrevButton] = useState<boolean>(false);
+    const [nextButton, setNextButton] = useState<boolean>(true);
 
     const handleSlideChange = () => {
         const activeIndex = swiper.activeIndex;
@@ -93,17 +97,21 @@ const StoriesSection = () => {
                 spaceBetween={40}
                 onSwiper={setSwiper}
                 onSlideChange={handleSlideChange}
-                loop={false}
-                watchSlidesProgress
             >
-                {history.history.map((slideContent, index) => (
-                    <SwiperSlide key={slideContent} virtualIndex={index}>
-                        <Story
-                            year={slideContent.year}
-                            description={slideContent.description}
-                        />
+                {stories ? (
+                    stories.map((slideContent, index) => (
+                        <SwiperSlide key={slideContent.id} virtualIndex={index}>
+                            <Story
+                                year={slideContent.year}
+                                description={slideContent.description}
+                            />
+                        </SwiperSlide>
+                    ))
+                ) : (
+                    <SwiperSlide key={0} virtualIndex={0}>
+                        "loading..."
                     </SwiperSlide>
-                ))}
+                )}
             </Swiper>
             <Eclipse onClick={handleNextClick} visible={nextButton}>
                 <svg

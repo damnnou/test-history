@@ -3,13 +3,10 @@ import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 
 interface MainTitleProps {
-    margin?: string;
     children: React.ReactNode;
 }
 
-const Title = styled.h1<{
-    margin?: string;
-}>`
+const Title = styled.h1`
     &:before {
         position: absolute;
         left: -1px;
@@ -21,7 +18,7 @@ const Title = styled.h1<{
 
     z-index: 100;
     position: relative;
-    margin-top: ${(props) => props.margin ?? "0px"};
+    margin-top: 150px;
     padding-left: 80px;
     max-width: 400px;
     height: fit-content;
