@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 import CircleButton from "../features/CircleButton.tsx";
@@ -64,14 +64,61 @@ const CircleButtonCategory = styled.label`
 `;
 
 const MainCircle: React.FC = () => {
-    const activeCategory = {
-        id: 0,
-        name: "Наука",
-    };
+    const [selectedCategory, setSelectedCategory] = useState(0);
+
+    const categoriesList = [
+        {
+            id: 1,
+            name: "Технологии",
+            styles: {
+                left: "125px",
+            },
+        },
+        {
+            id: 2,
+            name: "Кино",
+            styles: {
+                top: "15px",
+                left: "380px",
+            },
+        },
+        {
+            id: 3,
+            name: "Литература",
+            styles: {
+                top: "240.5px",
+                right: "-25.5px",
+            },
+        },
+        {
+            id: 4,
+            name: "Театр",
+            styles: {
+                bottom: "0px",
+                right: "125px",
+            },
+        },
+        {
+            id: 5,
+            name: "Спорт",
+            styles: {
+                left: "120px",
+                bottom: "3px",
+            },
+        },
+        {
+            id: 6,
+            name: "Наука",
+            styles: {
+                bottom: "240.5px",
+                left: "-25.5px",
+            },
+        },
+    ];
     const circleRef = useRef<HTMLDivElement | null>(null);
     const circleButtonRef = useRef<HTMLDivElement | null>(null);
 
-    const handleMove = () => {
+    const handleMove = (id) => {
         const circleButtonClass =
             "." + circleButtonRef.current?.className.split(" ")[0];
         gsap.to(circleRef.current, {
@@ -84,44 +131,33 @@ const MainCircle: React.FC = () => {
             duration: 0.5,
             ease: Power1.easeInOut,
         });
+        setSelectedCategory(
+            categoriesList.filter((category) => category.id === id)[0].id
+        );
     };
 
     return (
         <Cross>
             <Circle ref={circleRef}>
-                <CircleButtonWrapper
-                    ref={circleButtonRef}
-                    onClick={handleMove}
-                    style={{
-                        position: "absolute",
-                        left: "125px",
-                    }}
-                >
-                    <CircleButton
-                        selected={false}
-                        animated
-                        value={activeCategory.id}
-                    ></CircleButton>
-                    {}
-                </CircleButtonWrapper>
-                <CircleButtonWrapper
-                    style={{
-                        position: "absolute",
-                        top: "15px",
-                        left: "380px",
-                    }}
-                >
-                    <CircleButton
-                        animated
-                        selected={false}
-                        value={activeCategory.id}
-                    ></CircleButton>
-                    {activeCategory && (
-                        <CircleButtonCategory>
-                            {activeCategory.name}
-                        </CircleButtonCategory>
-                    )}
-                </CircleButtonWrapper>
+                {categoriesList.map((category) => (
+                    <CircleButtonWrapper
+                        key={category.id + category.name}
+                        ref={circleButtonRef}
+                        style={category.styles}
+                    >
+                        <CircleButton
+                            animated
+                            onClick={() => handleMove(category.id)}
+                            selected={selectedCategory === category.id}
+                            value={category.id}
+                        />
+                        {selectedCategory === category.id && (
+                            <CircleButtonCategory>
+                                {category.name}
+                            </CircleButtonCategory>
+                        )}
+                    </CircleButtonWrapper>
+                ))}
             </Circle>
         </Cross>
     );
