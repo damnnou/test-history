@@ -8,6 +8,9 @@ import SelectCategorySection from "./ui/SelectCategorySection.tsx";
 import StoriesSection from "./ui/StoriesSection.tsx";
 import history from "./api/history.ts";
 import type { HistoryItem } from "./types/historyItem.ts";
+import Clock from "./ui/Clock.tsx";
+import ClockComponent from "./ui/Clock.tsx";
+import CircleComponent from "./ui/Clock.tsx";
 
 const AppWrapper = styled.div`
     position: relative;

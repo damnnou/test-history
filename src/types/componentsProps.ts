@@ -5,8 +5,10 @@ export interface CircleButtonProps {
     width?: number;
     height?: number;
     value?: string | number;
+    degree?: number;
     disabled?: boolean;
     animated?: boolean;
+    selected?: boolean;
     children?: React.ReactNode;
     style?: React.CSSProperties;
     reference?: Ref<HTMLDivElement>;
