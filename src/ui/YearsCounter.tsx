@@ -13,6 +13,9 @@ const StyledContainer = styled.div`
     gap: 100px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 40;
+    pointer-events: none;
+    cursor: default;
 `;
 
 const YearsCounter: React.FC<YearsCounterProps> = ({ fromYear, toYear }) => {

@@ -46,7 +46,21 @@ const Circle = styled.div`
 const CircleButtonWrapper = styled.div`
     display: flex;
     gap: 20px;
-    z-index: 1500;
+    z-index: 100;
+    max-width: 56px;
+    max-height: 56px;
+    position: absolute;
+`;
+
+const CircleButtonCategory = styled.label`
+    position: absolute;
+    left: calc(56px + 20px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: ${colors["Black-blue"]};
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px; /* 150% */
 `;
 
 const MainCircle: React.FC = () => {
@@ -102,7 +116,11 @@ const MainCircle: React.FC = () => {
                         selected={false}
                         value={activeCategory.id}
                     ></CircleButton>
-                    {activeCategory && <label>{activeCategory.name}</label>}
+                    {activeCategory && (
+                        <CircleButtonCategory>
+                            {activeCategory.name}
+                        </CircleButtonCategory>
+                    )}
                 </CircleButtonWrapper>
             </Circle>
         </Cross>
