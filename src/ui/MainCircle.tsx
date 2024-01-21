@@ -73,6 +73,7 @@ const MainCircle: React.FC = () => {
             styles: {
                 left: "125px",
             },
+            degree: 120,
         },
         {
             id: 2,
@@ -81,6 +82,7 @@ const MainCircle: React.FC = () => {
                 top: "15px",
                 left: "380px",
             },
+            degree: 60,
         },
         {
             id: 3,
@@ -89,6 +91,7 @@ const MainCircle: React.FC = () => {
                 top: "240.5px",
                 right: "-25.5px",
             },
+            degree: 0,
         },
         {
             id: 4,
@@ -97,6 +100,7 @@ const MainCircle: React.FC = () => {
                 bottom: "0px",
                 right: "125px",
             },
+            degree: 300,
         },
         {
             id: 5,
@@ -105,6 +109,7 @@ const MainCircle: React.FC = () => {
                 left: "120px",
                 bottom: "3px",
             },
+            degree: 240,
         },
         {
             id: 6,
@@ -113,27 +118,43 @@ const MainCircle: React.FC = () => {
                 bottom: "240.5px",
                 left: "-25.5px",
             },
+            degree: 180,
         },
     ];
     const circleRef = useRef<HTMLDivElement | null>(null);
     const circleButtonRef = useRef<HTMLDivElement | null>(null);
 
-    const handleMove = (id) => {
+    let currentDegree = 120;
+
+    const handleMove = (id: number) => {
+        const category = categoriesList.filter(
+            (category) => category.id === id
+        )[0];
+        console.log(category);
         const circleButtonClass =
             "." + circleButtonRef.current?.className.split(" ")[0];
+
+        const initialDegree = 60;
+
+        const plusRotate =
+            "+=" + (currentDegree - initialDegree - category.degree);
+        const minusRotate = "-=" + (initialDegree - category.degree);
+
         gsap.to(circleRef.current, {
-            rotation: "+=80",
+            rotation: plusRotate,
             duration: 0.5,
             ease: Power1.easeInOut,
         });
+
         gsap.to(circleButtonClass, {
-            rotation: "-=80",
+            rotation: minusRotate,
             duration: 0.5,
             ease: Power1.easeInOut,
         });
-        setSelectedCategory(
-            categoriesList.filter((category) => category.id === id)[0].id
-        );
+        setSelectedCategory(category.id);
+        currentDegree = category.degree;
+
+        console.log(currentDegree);
     };
 
     return (

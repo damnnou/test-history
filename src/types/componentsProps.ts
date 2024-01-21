@@ -12,6 +12,7 @@ export interface CircleButtonProps {
     children?: React.ReactNode;
     style?: React.CSSProperties;
     reference?: Ref<HTMLDivElement>;
+    onClick?: () => void;
 }
 
 export interface StoryProps {
