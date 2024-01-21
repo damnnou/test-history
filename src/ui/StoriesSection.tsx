@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Story from "../features/Story.tsx";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 import history from "../api/history.ts";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Pagination } from "swiper/modules";
 
 const Section = styled.section`
     display: flex;
+    align-items: center;
+    max-width: 1440px; // Ограничение ширины
+    overflow: hidden; // Добавление скрытия, чтобы предотвратить появление горизонтального скролла
     justify-content: space-between;
-    margin: 0 80px;
     margin-top: 56px;
-    margin-right: 40px;
-    gap: 80px;
+    padding-right: 40px;
+    padding-left: 40px;
 `;
 
-const Eclipse = styled.button`
-    display: flex;
+const Eclipse = styled.button<{ visible: boolean }>`
+    z-index: 100;
+    display: "flex";
+    visibility: ${(props) => (props.visible ? "visible" : "hidden")};
     align-items: center;
     justify-content: center;
-    margin-left: auto;
-    margin: auto 0;
-    width: 40px;
-    height: 40px;
+    margin: auto 0px;
+    min-width: 40px;
+    min-height: 40px;
+    cursor: pointer;
     background-color: #fff;
     filter: drop-shadow(0px 0px 15px rgba(56, 119, 238, 0.1));
     border: none;
@@ -29,12 +35,77 @@ const Eclipse = styled.button`
 `;
 
 const StoriesSection = () => {
+    const [swiper, setSwiper] = useState(null);
+
+    const [prevButton, setPrevButton] = useState(false);
+    const [nextButton, setNextButton] = useState(true);
+
+    const handleSlideChange = () => {
+        const activeIndex = swiper.activeIndex;
+        const slidesPerView = 3;
+
+        if (activeIndex + slidesPerView === history.history.length) {
+            setNextButton(false);
+        } else {
+            setNextButton(true);
+        }
+
+        if (activeIndex > 0) {
+            setPrevButton(true);
+        } else {
+            setPrevButton(false);
+        }
+    };
+
+    const handlePrevClick = () => {
+        if (swiper) {
+            swiper.slidePrev();
+        }
+    };
+
+    const handleNextClick = () => {
+        if (swiper) {
+            swiper.slideNext();
+        }
+    };
+
     return (
         <Section>
-            {history.history.map((story) => (
-                <Story year={story.year} description={story.description} />
-            ))}
-            <Eclipse>
+            <Eclipse onClick={handlePrevClick} visible={prevButton}>
+                <svg
+                    style={{ transform: "scale(-1, 1)" }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="8"
+                    height="12"
+                    viewBox="0 0 8 12"
+                    fill="none"
+                >
+                    <path d="M1 1L6 6L1 11" stroke="#3877EE" strokeWidth="2" />
+                </svg>
+            </Eclipse>
+            <Swiper
+                mousewheel={true}
+                pagination={{
+                    clickable: true,
+                }}
+                modules={[Mousewheel, Pagination]}
+                slidesPerView={3}
+                spaceBetween={40}
+                onSwiper={setSwiper}
+                onSlideChange={handleSlideChange}
+                loop={false}
+                watchSlidesProgress
+            >
+                {history.history.map((slideContent, index) => (
+                    <SwiperSlide key={slideContent} virtualIndex={index}>
+                        <Story
+                            year={slideContent.year}
+                            description={slideContent.description}
+                        />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            <Eclipse onClick={handleNextClick} visible={nextButton}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="8"
@@ -42,7 +113,7 @@ const StoriesSection = () => {
                     viewBox="0 0 8 12"
                     fill="none"
                 >
-                    <path d="M1 1L6 6L1 11" stroke="#3877EE" stroke-width="2" />
+                    <path d="M1 1L6 6L1 11" stroke="#3877EE" strokeWidth="2" />
                 </svg>
             </Eclipse>
         </Section>

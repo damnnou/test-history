@@ -10,3 +10,12 @@ body {
 h3 {
     margin: 0 0 0 0;
 }
+
+.swiper {
+    display: flex;
+    width: calc(100% - 80px);
+}
+
+.swiper-wrapper {
+    display: flex;
+}
