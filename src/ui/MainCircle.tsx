@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
+import CircleButton from "../features/CircleButton.tsx";
 
 const Circle = styled.div`
     &:before {
@@ -39,9 +40,9 @@ const Circle = styled.div`
 
 const MainCircle: React.FC = () => {
     return (
-        <>
-            <Circle />
-        </>
+        <Circle>
+            <CircleButton animated>{6}</CircleButton>
+        </Circle>
     );
 };
 
