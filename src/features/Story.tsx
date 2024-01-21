@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
-
-interface StoryProps {
-    year: number;
-    description: string;
-}
+import type { StoryProps } from "../types/componentsProps.ts";
 
 const Container = styled.div`
     display: flex;

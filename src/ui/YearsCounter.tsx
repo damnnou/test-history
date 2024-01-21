@@ -2,11 +2,7 @@ import React from "react";
 import YearTitle from "../features/YearTitle.tsx";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
-
-interface YearsCounterProps {
-    fromYear: number;
-    toYear: number;
-}
+import type { YearsCounterProps } from "../types/componentsProps.ts";
 
 const StyledContainer = styled.div`
     display: flex;

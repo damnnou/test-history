@@ -5,11 +5,7 @@ import { colors } from "../styles/colors.ts";
 import history from "../api/history.ts";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
-import type { HistoryItem } from "../types/historyItem.ts";
-
-interface StoriesSectionProps {
-    stories: HistoryItem[];
-}
+import type { StoriesSectionProps } from "../types/componentsProps.ts";
 
 const Section = styled.section`
     display: flex;

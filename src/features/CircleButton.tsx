@@ -1,20 +1,12 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
-
-interface CircleButtonProps {
-    width?: string;
-    height?: string;
-    disabled?: boolean;
-    animated?: boolean;
-    children?: React.ReactNode;
-    style?: Object;
-}
+import type { CircleButtonProps } from "../types/componentsProps.ts";
 
 const Button = styled.div<CircleButtonProps>`
     // Дефолтные стили
-    width: ${(props) => props.width ?? "56px"};
-    height: ${(props) => props.height ?? "56px"};
+    width: ${(props) => (props.width ? props.width + "px" : "50px")};
+    height: ${(props) => (props.height ? props.height + "px" : "50px")};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,6 +15,7 @@ const Button = styled.div<CircleButtonProps>`
     cursor: pointer;
     border: 1px solid ${colors["Black-blue-Opacity-50"]};
     color: ${colors["Black-blue"]};
+    z-index: 1000;
 
     // Стили, если кнопка анимированная
     ${(props) =>
@@ -47,8 +40,16 @@ const Button = styled.div<CircleButtonProps>`
             color: ${colors["Black-blue"]}
     `}
 `;
-const CircleButton: React.FC<CircleButtonProps> = ({ children, ...props }) => {
-    return <Button {...props}>{children}</Button>;
+const CircleButton: React.FC<CircleButtonProps> = ({
+    children,
+    reference,
+    ...props
+}) => {
+    return (
+        <Button {...props} ref={reference}>
+            {children ?? props.value}
+        </Button>
+    );
 };
 
 export default CircleButton;

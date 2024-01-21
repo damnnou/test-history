@@ -27,7 +27,7 @@ const SmallText = styled.p`
     line-height: normal;
 `;
 
-const SelectCategorySection = () => {
+const SelectCategorySection: React.FC = () => {
     return (
         <Container>
             <SmallText>06/06</SmallText>

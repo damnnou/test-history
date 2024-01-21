@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 import CircleButton from "../features/CircleButton.tsx";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Circle = styled.div`
     &:before {
@@ -39,9 +41,20 @@ const Circle = styled.div`
 `;
 
 const MainCircle: React.FC = () => {
+    const circleButtonRef = useRef<HTMLDivElement | null>(null);
+
     return (
         <Circle>
-            <CircleButton animated>{6}</CircleButton>
+            <CircleButton
+                reference={circleButtonRef}
+                value={6}
+                width={56}
+                height={56}
+                animated
+            />
+            <CircleButton value={1} width={56} height={56} animated />
+            <CircleButton value={2} width={56} height={56} animated />
+            <CircleButton value={3} width={56} height={56} animated />
         </Circle>
     );
 };

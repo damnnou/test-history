@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 
-interface MainTitleProps {
-    children: React.ReactNode;
-}
+import type { ComponentWithChildren } from "../types/componentsProps.ts";
 
 const Title = styled.h1`
     &:before {
@@ -30,7 +28,7 @@ const Title = styled.h1`
     line-height: 120%; /* 67.2px */
 `;
 
-const MainTitle: React.FC<MainTitleProps> = ({ children, ...props }) => {
+const MainTitle: React.FC<ComponentWithChildren> = ({ children, ...props }) => {
     return <Title {...props}>{children}</Title>;
 };
 

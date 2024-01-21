@@ -1,12 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import type { YearTitleProps } from "../types/componentsProps";
 
-interface YearTitleProps {
-    color?: string;
-    children: number;
-}
-
-const Year = styled.h1<{ color?: string }>`
+const Year = styled.h1<YearTitleProps>`
     color: ${(props) => props.color ?? "#5D5FEF"};
 
     margin: 0 0;
