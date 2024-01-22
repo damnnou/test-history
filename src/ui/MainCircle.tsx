@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 import CircleButton from "../features/CircleButton.tsx";
 import gsap, { Power1 } from "gsap";
+import { initialCategories } from "../constants/categories.ts";
 
 const Cross = styled.div`
     &:before {
@@ -65,96 +66,54 @@ const CircleButtonCategory = styled.label`
 
 const MainCircle: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState(0);
+    const [categoriesList, setCategoriesList] = useState(initialCategories);
 
-    const categoriesList = [
-        {
-            id: 1,
-            name: "Технологии",
-            styles: {
-                left: "125px",
-            },
-            degree: 120,
-        },
-        {
-            id: 2,
-            name: "Кино",
-            styles: {
-                top: "15px",
-                left: "380px",
-            },
-            degree: 60,
-        },
-        {
-            id: 3,
-            name: "Литература",
-            styles: {
-                top: "240.5px",
-                right: "-25.5px",
-            },
-            degree: 0,
-        },
-        {
-            id: 4,
-            name: "Театр",
-            styles: {
-                bottom: "0px",
-                right: "125px",
-            },
-            degree: 300,
-        },
-        {
-            id: 5,
-            name: "Спорт",
-            styles: {
-                left: "120px",
-                bottom: "3px",
-            },
-            degree: 240,
-        },
-        {
-            id: 6,
-            name: "Наука",
-            styles: {
-                bottom: "240.5px",
-                left: "-25.5px",
-            },
-            degree: 180,
-        },
-    ];
     const circleRef = useRef<HTMLDivElement | null>(null);
     const circleButtonRef = useRef<HTMLDivElement | null>(null);
 
-    let currentDegree = 120;
-
     const handleMove = (id: number) => {
+        // Находим выбранную категорию
         const category = categoriesList.filter(
             (category) => category.id === id
         )[0];
-        console.log(category);
+
+        // Получаем класс из референса кнопки
         const circleButtonClass =
             "." + circleButtonRef.current?.className.split(" ")[0];
 
+        // Декларируем начальное/конечное положение в градусах
         const initialDegree = 60;
 
-        const plusRotate =
-            "+=" + (currentDegree - initialDegree - category.degree);
-        const minusRotate = "-=" + (initialDegree - category.degree);
+        // Вычисляем градус поворота на основе разницы текущего положения и конечного
+        const rotateDegree = category.degree - initialDegree;
+
+        const plusRotate = "+=" + rotateDegree;
+        const minusRotate = "-=" + rotateDegree;
 
         gsap.to(circleRef.current, {
-            rotation: plusRotate,
+            rotation: plusRotate, // поворачиваем круг на вычисленное значение градуса
             duration: 0.5,
             ease: Power1.easeInOut,
         });
 
         gsap.to(circleButtonClass, {
-            rotation: minusRotate,
+            rotation: minusRotate, // поворачиваем внутренности кнопки в противоположную сторону
             duration: 0.5,
             ease: Power1.easeInOut,
         });
-        setSelectedCategory(category.id);
-        currentDegree = category.degree;
 
-        console.log(currentDegree);
+        // Устанавливаем итоговые значения в массив категорий
+        setCategoriesList((prevCategories) =>
+            prevCategories.map((cat) => {
+                if (cat.id === category.id) {
+                    return { ...cat, degree: initialDegree };
+                } else {
+                    return { ...cat, degree: cat.degree - rotateDegree };
+                }
+            })
+        );
+        // Устанавливаем выбранную категорию
+        setSelectedCategory(category.id);
     };
 
     return (
