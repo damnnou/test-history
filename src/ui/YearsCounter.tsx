@@ -1,8 +1,8 @@
 import React from "react";
-import YearTitle from "../features/YearTitle.tsx";
+import YearTitle from "../features/YearTitle";
 import styled from "styled-components";
-import { colors } from "../styles/colors.ts";
-import type { YearsCounterProps } from "../types/componentsProps.ts";
+import { colors } from "../styles/colors";
+import type { YearsCounterProps } from "../types/componentsProps";
 
 const StyledContainer = styled.div`
     display: flex;

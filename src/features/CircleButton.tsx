@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import { colors } from "../styles/colors.ts";
-import type { CircleButtonProps } from "../types/componentsProps.ts";
+import styled from "styled-components";
+import { colors } from "../styles/colors";
+import type { CircleButtonProps } from "../types/componentsProps";
 
 const Button = styled.div<CircleButtonProps>`
     // Дефолтные стили

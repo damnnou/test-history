@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../styles/colors.ts";
-
-import type { ComponentWithChildren } from "../types/componentsProps.ts";
+import { colors } from "../styles/colors";
+import type { ComponentWithChildren } from "../types/componentsProps";
 
 const Title = styled.h1`
     &:before {

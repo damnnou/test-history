@@ -1,4 +1,4 @@
-import type { HistoryItem } from "../types/historyItem";
+import type { HistoryItem } from "../types/variablesProps";
 
 const history: HistoryItem[] = [
     {

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Story from "../features/Story.tsx";
+import Story from "../features/Story";
 import styled from "styled-components";
-import { colors } from "../styles/colors.ts";
-import history from "../api/history.ts";
+import { colors } from "../styles/colors";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
-import type { StoriesSectionProps } from "../types/componentsProps.ts";
+import type { StoriesSectionProps } from "../types/componentsProps";
 
 const Section = styled.section`
     display: flex;
@@ -33,17 +32,18 @@ const Eclipse = styled.button<{ visible: boolean }>`
 `;
 
 const StoriesSection: React.FC<StoriesSectionProps> = ({ stories }) => {
-    const [swiper, setSwiper] = useState<SwiperClass>(null);
+    const [swiper, setSwiper] = useState<SwiperClass | null>(null);
     const [prevButton, setPrevButton] = useState<boolean>(false);
     const [nextButton, setNextButton] = useState<boolean>(true);
 
     useEffect(() => {
         if (swiper) {
-            swiper.slideTo(0);
+            swiper.slideReset();
         }
     }, []);
 
     const handleSlideChange = () => {
+        if (!swiper) return;
         const activeIndex = swiper.activeIndex;
         const slidesPerView = 3;
 

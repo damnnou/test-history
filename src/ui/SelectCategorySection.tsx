@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import CircleButton from "../features/CircleButton.tsx";
+import CircleButton from "../features/CircleButton";
+import { SelectCategorySectionProps } from "../types/componentsProps";
 
 const Container = styled.div`
     display: flex;
@@ -27,7 +28,7 @@ const SmallText = styled.p`
     line-height: normal;
 `;
 
-const SelectCategorySection: React.FC = ({
+const SelectCategorySection: React.FC<SelectCategorySectionProps> = ({
     selectedCategory,
     onChangeCategory,
 }) => {

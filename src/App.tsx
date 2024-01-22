@@ -1,14 +1,14 @@
-import React, { Ref, RefObject, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { colors } from "./styles/colors.ts";
-import MainCircle from "./ui/MainCircle.tsx";
-import MainTitle from "./features/MainTitle.tsx";
-import YearsCounter from "./ui/YearsCounter.tsx";
-import SelectCategorySection from "./ui/SelectCategorySection.tsx";
-import StoriesSection from "./ui/StoriesSection.tsx";
-import history from "./api/history.ts";
-import { initialCategories } from "./constants/categories.ts";
-import type { HistoryItem } from "./types/historyItem.ts";
+import { colors } from "./styles/colors";
+import MainCircle from "./ui/MainCircle";
+import MainTitle from "./features/MainTitle";
+import YearsCounter from "./ui/YearsCounter";
+import SelectCategorySection from "./ui/SelectCategorySection";
+import StoriesSection from "./ui/StoriesSection";
+import history from "./api/history";
+import { initialCategories } from "./constants/categories";
+import type { HistoryItem } from "./types/variablesProps";
 import gsap, { Power1 } from "gsap";
 
 const AppWrapper = styled.div`
@@ -24,7 +24,7 @@ const AppWrapper = styled.div`
 `;
 
 const App: React.FC = () => {
-    const [selectedCategory, setSelectedCategory] = useState<number | null>(2);
+    const [selectedCategory, setSelectedCategory] = useState<number>(2);
     const [categoriesList, setCategoriesList] = useState(initialCategories);
 
     const circleRef = useRef<HTMLDivElement | null>(null);
@@ -132,6 +132,7 @@ const App: React.FC = () => {
     return (
         <AppWrapper>
             <MainCircle
+                isLoading={isLoading}
                 circleRef={circleRef}
                 circleButtonRef={circleButtonRef}
                 categoriesList={categoriesList}

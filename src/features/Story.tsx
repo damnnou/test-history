@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../styles/colors.ts";
-import type { StoryProps } from "../types/componentsProps.ts";
+import { colors } from "../styles/colors";
+import type { StoryProps } from "../types/componentsProps";
 
 const Container = styled.div`
     display: flex;

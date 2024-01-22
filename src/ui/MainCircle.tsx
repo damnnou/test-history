@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { colors } from "../styles/colors.ts";
-import CircleButton from "../features/CircleButton.tsx";
+import { colors } from "../styles/colors";
+import CircleButton from "../features/CircleButton";
+import { MainCircleProps } from "../types/componentsProps";
 
 const Cross = styled.div`
     &:before {
@@ -72,7 +73,7 @@ const CircleButtonCategory = styled.label`
     line-height: 30px; /* 150% */
 `;
 
-const MainCircle: React.FC = ({
+const MainCircle: React.FC<MainCircleProps> = ({
     isLoading,
     categoriesList,
     onRotate,

@@ -1,7 +1,20 @@
-import { Ref } from "react";
-import type { HistoryItem } from "./historyItem";
+import { Ref, RefObject } from "react";
+import type { HistoryItem, CategoryObject } from "./variablesProps";
 
-export interface CircleButtonProps {
+interface MainCircleProps {
+    isLoading: boolean;
+    categoriesList: CategoryObject[];
+    onRotate: (
+        categoryId: number,
+        reference1: RefObject<HTMLDivElement>,
+        reference2: RefObject<HTMLDivElement>
+    ) => void;
+    selectedCategory: number;
+    circleRef: RefObject<HTMLDivElement>;
+    circleButtonRef: RefObject<HTMLDivElement>;
+}
+
+interface CircleButtonProps {
     width?: number;
     height?: number;
     value?: string | number;
@@ -11,29 +24,48 @@ export interface CircleButtonProps {
     selected?: boolean;
     children?: React.ReactNode;
     style?: React.CSSProperties;
-    reference?: Ref<HTMLDivElement>;
+    reference?: RefObject<HTMLDivElement>;
     onClick?: () => void;
 }
 
-export interface StoryProps {
+type PartialCircleButtonProps = Partial<CircleButtonProps>;
+
+interface SelectCategorySectionProps {
+    selectedCategory: number;
+    onChangeCategory: (id: number) => void;
+}
+
+interface StoryProps {
     year: number;
     description: string;
 }
 
-export interface YearTitleProps {
+interface YearTitleProps {
     color?: string;
     children: number;
 }
 
-export interface YearsCounterProps {
+interface YearsCounterProps {
     fromYear: number;
     toYear: number;
 }
 
-export interface ComponentWithChildren {
+interface ComponentWithChildren {
     children: React.ReactNode;
 }
 
-export interface StoriesSectionProps {
+interface StoriesSectionProps {
     stories: HistoryItem[];
 }
+
+export type {
+    MainCircleProps,
+    CircleButtonProps,
+    PartialCircleButtonProps,
+    StoryProps,
+    YearTitleProps,
+    YearsCounterProps,
+    ComponentWithChildren,
+    StoriesSectionProps,
+    SelectCategorySectionProps,
+};
