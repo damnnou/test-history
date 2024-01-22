@@ -60,7 +60,7 @@ const anime = keyframes`
 `;
 
 const CircleButtonCategory = styled.label`
-    animation: ${anime} 0.5s;
+    animation: ${anime} 1s;
     transition: all;
     position: absolute;
     left: calc(56px + 20px);
@@ -73,6 +73,7 @@ const CircleButtonCategory = styled.label`
 `;
 
 const MainCircle: React.FC = ({
+    isLoading,
     categoriesList,
     onRotate,
     selectedCategory,
@@ -103,7 +104,7 @@ const MainCircle: React.FC = ({
                             selected={selectedCategory === category.id}
                             value={category.id}
                         />
-                        {selectedCategory === category.id && (
+                        {selectedCategory === category.id && !isLoading && (
                             <CircleButtonCategory>
                                 {category.name}
                             </CircleButtonCategory>

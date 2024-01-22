@@ -4,7 +4,7 @@ export const initialCategories = [
         name: "Технологии",
         styles: {
             top: `${-Math.sin((120 * Math.PI) / 180) * 265.8 + 238}px`,
-            left: `${Math.cos((120 * Math.PI) / 180) * 265.8 + 238}px`,
+            left: `${Math.cos((120 * Math.PI) / 180) * 265.8 + 237}px`,
         },
         degree: 120,
     },
@@ -13,7 +13,7 @@ export const initialCategories = [
         name: "Кино",
         styles: {
             top: `${-Math.sin((60 * Math.PI) / 180) * 265.8 + 238}px`,
-            left: `${Math.cos((60 * Math.PI) / 180) * 265.8 + 238}px`,
+            left: `${Math.cos((60 * Math.PI) / 180) * 265.8 + 237}px`,
         },
         degree: 60,
     },
@@ -22,7 +22,7 @@ export const initialCategories = [
         name: "Литература",
         styles: {
             top: `${-Math.sin((0 * Math.PI) / 180) * 265.8 + 238}px`,
-            left: `${Math.cos((0 * Math.PI) / 180) * 265.8 + 238}px`,
+            left: `${Math.cos((0 * Math.PI) / 180) * 265.8 + 237}px`,
         },
         degree: 0,
     },
@@ -31,7 +31,7 @@ export const initialCategories = [
         name: "Театр",
         styles: {
             top: `${-Math.sin((-60 * Math.PI) / 180) * 265.8 + 238}px`,
-            left: `${Math.cos((-60 * Math.PI) / 180) * 265.8 + 238}px`,
+            left: `${Math.cos((-60 * Math.PI) / 180) * 265.8 + 237}px`,
         },
         degree: -60,
     },
@@ -40,7 +40,7 @@ export const initialCategories = [
         name: "Спорт",
         styles: {
             top: `${-Math.sin((-120 * Math.PI) / 180) * 265.8 + 238}px`,
-            left: `${Math.cos((-120 * Math.PI) / 180) * 265.8 + 238}px`,
+            left: `${Math.cos((-120 * Math.PI) / 180) * 265.8 + 237}px`,
         },
         degree: -120,
     },
@@ -49,7 +49,7 @@ export const initialCategories = [
         name: "Наука",
         styles: {
             top: `${-Math.sin((-180 * Math.PI) / 180) * 265.8 + 238}px`,
-            left: `${Math.cos((-180 * Math.PI) / 180) * 265.8 + 238}px`,
+            left: `${Math.cos((-180 * Math.PI) / 180) * 265.8 + 237}px`,
         },
         degree: -180,
     },
