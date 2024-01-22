@@ -15,17 +15,17 @@ interface MainCircleProps {
 }
 
 interface CircleButtonProps {
-    width?: number;
-    height?: number;
-    value?: string | number;
-    degree?: number;
-    disabled?: boolean;
-    animated?: boolean;
-    selected?: boolean;
-    children?: React.ReactNode;
-    style?: React.CSSProperties;
-    reference?: RefObject<HTMLDivElement>;
-    onClick?: () => void;
+    width: number;
+    height: number;
+    value: string | number;
+    degree: number;
+    disabled: boolean;
+    animated: boolean;
+    selected: boolean;
+    children: React.ReactNode;
+    style: React.CSSProperties;
+    reference: RefObject<HTMLDivElement>;
+    onClick: () => void;
 }
 
 type PartialCircleButtonProps = Partial<CircleButtonProps>;
@@ -56,6 +56,7 @@ interface ComponentWithChildren {
 
 interface StoriesSectionProps {
     stories: HistoryItem[];
+    isLoading: boolean;
 }
 
 export type {

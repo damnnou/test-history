@@ -281,7 +281,7 @@ const getHistoryByCategory = (categoryName: string) => {
     return new Promise<HistoryItem[]>((resolve) => {
         setTimeout(() => {
             resolve(history.filter((story) => story.category === categoryName));
-        }, 200);
+        }, 100);
     });
 };
 

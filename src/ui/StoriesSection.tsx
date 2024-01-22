@@ -1,12 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Story from "../features/Story";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../styles/colors";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
 import type { StoriesSectionProps } from "../types/componentsProps";
 
-const Section = styled.section`
+const fadeInSectionAnimation = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const fadeOutSectionAnimation = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const Section = styled.section<{ hidden: boolean }>`
+    animation: ${(props) =>
+            props.hidden ? fadeOutSectionAnimation : fadeInSectionAnimation}
+        0.5s;
+    opacity: ${(props) => (props.hidden ? 0 : 1)};
     display: flex;
     align-items: center;
     max-width: 1440px;
@@ -31,16 +53,18 @@ const Eclipse = styled.button<{ visible: boolean }>`
     color: ${colors.Blue};
 `;
 
-const StoriesSection: React.FC<StoriesSectionProps> = ({ stories }) => {
+const StoriesSection: React.FC<StoriesSectionProps> = ({
+    isLoading,
+    stories,
+}) => {
     const [swiper, setSwiper] = useState<SwiperClass | null>(null);
     const [prevButton, setPrevButton] = useState<boolean>(false);
     const [nextButton, setNextButton] = useState<boolean>(true);
 
     useEffect(() => {
-        if (swiper) {
-            swiper.slideReset();
-        }
-    }, []);
+        handleReset();
+        handleSlideChange();
+    }, [isLoading]);
 
     const handleSlideChange = () => {
         if (!swiper) return;
@@ -60,6 +84,12 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({ stories }) => {
         }
     };
 
+    const handleReset = () => {
+        if (swiper) {
+            swiper.slideReset(500);
+        }
+    };
+
     const handlePrevClick = () => {
         if (swiper) {
             swiper.slidePrev();
@@ -73,60 +103,69 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({ stories }) => {
     };
 
     return (
-        <Section>
-            <Eclipse onClick={handlePrevClick} visible={prevButton}>
-                <svg
-                    style={{
-                        transform: "scale(-1, 1)",
-                    }}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="8"
-                    height="12"
-                    viewBox="0 0 8 12"
-                    fill="none"
-                >
-                    <path d="M1 1L6 6L1 11" stroke="#3877EE" strokeWidth="2" />
-                </svg>
-            </Eclipse>
-            <Swiper
-                style={{}}
-                mousewheel={true}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Mousewheel, Pagination]}
-                slidesPerView={3}
-                spaceBetween={40}
-                onSwiper={setSwiper}
-                onSlideChange={handleSlideChange}
-            >
-                {stories ? (
-                    stories.map((slideContent, index) => (
-                        <SwiperSlide key={slideContent.id} virtualIndex={index}>
-                            <Story
-                                year={slideContent.year}
-                                description={slideContent.description}
+        <>
+            {stories.length > 0 && !isLoading && (
+                <Section hidden={isLoading}>
+                    <Eclipse onClick={handlePrevClick} visible={prevButton}>
+                        <svg
+                            style={{
+                                transform: "scale(-1, 1)",
+                            }}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="8"
+                            height="12"
+                            viewBox="0 0 8 12"
+                            fill="none"
+                        >
+                            <path
+                                d="M1 1L6 6L1 11"
+                                stroke="#3877EE"
+                                strokeWidth="2"
                             />
-                        </SwiperSlide>
-                    ))
-                ) : (
-                    <SwiperSlide key={0} virtualIndex={0}>
-                        "loading..."
-                    </SwiperSlide>
-                )}
-            </Swiper>
-            <Eclipse onClick={handleNextClick} visible={nextButton}>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="8"
-                    height="12"
-                    viewBox="0 0 8 12"
-                    fill="none"
-                >
-                    <path d="M1 1L6 6L1 11" stroke="#3877EE" strokeWidth="2" />
-                </svg>
-            </Eclipse>
-        </Section>
+                        </svg>
+                    </Eclipse>
+                    <Swiper
+                        style={{}}
+                        mousewheel={true}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        modules={[Mousewheel, Pagination]}
+                        slidesPerView={3}
+                        spaceBetween={40}
+                        onSwiper={setSwiper}
+                        onSlideChange={handleSlideChange}
+                    >
+                        {stories.map((slideContent, index) => (
+                            <SwiperSlide
+                                key={slideContent.id}
+                                virtualIndex={index}
+                            >
+                                <Story
+                                    year={slideContent.year}
+                                    description={slideContent.description}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                    <Eclipse onClick={handleNextClick} visible={nextButton}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="8"
+                            height="12"
+                            viewBox="0 0 8 12"
+                            fill="none"
+                        >
+                            <path
+                                d="M1 1L6 6L1 11"
+                                stroke="#3877EE"
+                                strokeWidth="2"
+                            />
+                        </svg>
+                    </Eclipse>
+                </Section>
+            )}
+        </>
     );
 };
 

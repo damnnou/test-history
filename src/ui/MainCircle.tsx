@@ -51,7 +51,8 @@ const CircleButtonWrapper = styled.div`
     max-height: 56px;
     position: absolute;
 `;
-const anime = keyframes`
+
+const opacityAnimation = keyframes`
   from {
     opacity: 0;
   }
@@ -61,7 +62,7 @@ const anime = keyframes`
 `;
 
 const CircleButtonCategory = styled.label`
-    animation: ${anime} 1s;
+    animation: ${opacityAnimation} 1s;
     transition: all;
     position: absolute;
     left: calc(56px + 20px);
@@ -105,7 +106,7 @@ const MainCircle: React.FC<MainCircleProps> = ({
                             selected={selectedCategory === category.id}
                             value={category.id}
                         />
-                        {selectedCategory === category.id && !isLoading && (
+                        {!isLoading && selectedCategory === category.id && (
                             <CircleButtonCategory>
                                 {category.name}
                             </CircleButtonCategory>

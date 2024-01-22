@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import type { CircleButtonProps } from "../types/componentsProps";
+import type {
+    CircleButtonProps,
+    PartialCircleButtonProps,
+} from "../types/componentsProps";
 
-const Button = styled.div<CircleButtonProps>`
+const Button = styled.div<PartialCircleButtonProps>`
     // Дефолтные стили
     width: ${(props) => (props.width ?? 50) + "px"};
     height: ${(props) => (props.height ?? 50) + "px"};
@@ -21,7 +24,7 @@ const Button = styled.div<CircleButtonProps>`
     ${(props) =>
         !props.disabled &&
         `
-        transition: all ease-in-out 0.25s;
+        transition: all ease-in-out 0.35s;
         &:hover {
         background-color: #fff;
     }`}
@@ -32,7 +35,7 @@ const Button = styled.div<CircleButtonProps>`
         `   
             background-color: ${colors["Black-blue"]};
             transform: scale(.1); 
-            transition: all ease-in-out .25s;
+            transition: all ease-in-out 0.35s;
 
             &:hover {
                 transform: scale(1);
@@ -58,7 +61,7 @@ const Button = styled.div<CircleButtonProps>`
             color: ${colors["Black-blue"]}
     }`}
 `;
-const CircleButton: React.FC<CircleButtonProps> = ({
+const CircleButton: React.FC<PartialCircleButtonProps> = ({
     children,
     reference,
     ...props

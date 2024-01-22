@@ -34,11 +34,10 @@ const App: React.FC = () => {
 
     const [fromYear, setFromYear] = useState<number>(1987);
     const [toYear, setToYear] = useState<number>(1991);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     // Анимация подсчета лет
     const handleAnimateYears = (from: number, to: number) => {
-        if (isLoading) return;
         setIsLoading(true);
 
         // Остановка и очистка интервала
@@ -57,25 +56,8 @@ const App: React.FC = () => {
                 if (prev === to) return fastClean(to);
                 return to < prev ? (prev -= 1) : (prev += 1);
             });
-        }, 50); // каждые 50 мс обновляется состояние
+        }, 35); // каждые 50 мс обновляется состояние
     };
-
-    // Получение историй при смене категории
-    useEffect(() => {
-        const category = categoriesList.find(
-            (cat) => cat.id === selectedCategory
-        );
-        if (category) {
-            history.getHistoryByCategory(category.name).then((data) => {
-                setStories(data);
-                const storyYears = data.map((story) => story.year);
-                handleAnimateYears(
-                    storyYears[0],
-                    storyYears[storyYears.length - 1]
-                );
-            });
-        } else return;
-    }, [selectedCategory]);
 
     // Выбор категории
     const handleCategoryChange = async (id: number) => {
@@ -105,13 +87,14 @@ const App: React.FC = () => {
 
         gsap.to(circleRef?.current, {
             rotation: plusRotate, // поворачиваем круг на вычисленное значение градуса
-            duration: 0.5,
+            duration: 0.8,
             ease: Power1.easeInOut,
+            onComplete: () => {},
         });
 
         gsap.to(circleButtonClass, {
             rotation: minusRotate, // поворачиваем внутренности кнопки в противоположную сторону
-            duration: 0.5,
+            duration: 0.8,
             ease: Power1.easeInOut,
         });
 
@@ -125,9 +108,35 @@ const App: React.FC = () => {
                 }
             })
         );
-        setSelectedCategory(category.id);
         setIsLoading(false);
+        setSelectedCategory(category.id);
     };
+
+    useEffect(() => {
+        if (isLoading) return;
+        const storyYears = stories.map((story) => story.year);
+        handleAnimateYears(storyYears[0], storyYears[storyYears.length - 1]);
+    }, [stories]);
+
+    // Получение историй при смене категории
+    useEffect(() => {
+        setIsLoading(true);
+        const category = categoriesList.find(
+            (cat) => cat.id === selectedCategory
+        );
+
+        if (category) {
+            console.log("fetching data...");
+            history
+                .getHistoryByCategory(category.name)
+                .then((data) => {
+                    setStories(data);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        }
+    }, [selectedCategory]);
 
     return (
         <AppWrapper>
@@ -145,7 +154,7 @@ const App: React.FC = () => {
                 onChangeCategory={handleCategoryChange}
                 selectedCategory={selectedCategory}
             />
-            <StoriesSection stories={stories} />
+            <StoriesSection isLoading={isLoading} stories={stories} />
         </AppWrapper>
     );
 };
