@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Ref, RefObject, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { colors } from "./styles/colors.ts";
 import MainCircle from "./ui/MainCircle.tsx";
@@ -7,10 +7,9 @@ import YearsCounter from "./ui/YearsCounter.tsx";
 import SelectCategorySection from "./ui/SelectCategorySection.tsx";
 import StoriesSection from "./ui/StoriesSection.tsx";
 import history from "./api/history.ts";
+import { initialCategories } from "./constants/categories.ts";
 import type { HistoryItem } from "./types/historyItem.ts";
-import Clock from "./ui/Clock.tsx";
-import ClockComponent from "./ui/Clock.tsx";
-import CircleComponent from "./ui/Clock.tsx";
+import gsap, { Power1 } from "gsap";
 
 const AppWrapper = styled.div`
     position: relative;
@@ -25,25 +24,83 @@ const AppWrapper = styled.div`
 `;
 
 const App: React.FC = () => {
+    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [categoriesList, setCategoriesList] = useState(initialCategories);
+
+    const circleRef = useRef<HTMLDivElement | null>(null);
+    const circleButtonRef = useRef<HTMLDivElement | null>(null);
+
     const [stories, setStories] = useState<HistoryItem[]>([]);
 
-    const [fromYear, setFromYear] = useState<number>(2015);
-    const [toYear, setToYear] = useState<number>(2022);
+    const fromYear = 2015;
+    const toYear = 2022;
 
     useEffect(() => {
         history.getHistory().then((data) => setStories(data));
     }, []);
 
-    useEffect(() => {
-        console.log(stories);
-    }, [stories]);
+    const handleSetCategory = (id: number) => {
+        // Находим выбранную категорию
+        const category = categoriesList.find((cat) => cat.id === id);
+
+        if (!category) {
+            console.error(`category with id ${id} not found`);
+            return;
+        }
+
+        // Получаем класс из референса кнопки
+        const circleButtonClass =
+            "." + circleButtonRef?.current?.className.split(" ")[0];
+
+        // Декларируем начальное/конечное положение в градусах
+        const initialDegree = 60;
+
+        // Вычисляем градус поворота на основе разницы текущего положения и конечного
+        const rotateDegree = category.degree - initialDegree;
+
+        const plusRotate = "+=" + rotateDegree;
+        const minusRotate = "-=" + rotateDegree;
+
+        gsap.to(circleRef?.current, {
+            rotation: plusRotate, // поворачиваем круг на вычисленное значение градуса
+            duration: 0.5,
+            ease: Power1.easeInOut,
+        });
+
+        gsap.to(circleButtonClass, {
+            rotation: minusRotate, // поворачиваем внутренности кнопки в противоположную сторону
+            duration: 0.5,
+            ease: Power1.easeInOut,
+        });
+
+        // Устанавливаем итоговые значения в массив категорий
+        setCategoriesList((prevCategories) =>
+            prevCategories.map((cat) => {
+                if (cat.id === category.id) {
+                    return { ...cat, degree: initialDegree };
+                } else {
+                    return { ...cat, degree: cat.degree - rotateDegree };
+                }
+            })
+        );
+        setSelectedCategory(category.id);
+    };
 
     return (
         <AppWrapper>
-            <MainCircle />
+            <MainCircle
+                circleRef={circleRef}
+                circleButtonRef={circleButtonRef}
+                categoriesList={categoriesList}
+                onRotate={handleSetCategory}
+                selectedCategory={selectedCategory}
+            />
             <MainTitle>Исторические даты</MainTitle>
             <YearsCounter fromYear={fromYear} toYear={toYear} />
-            <SelectCategorySection />
+            <SelectCategorySection
+                onChangeCategory={handleSetCategory}
+                selectedCategory={selectedCategory}
+            />
             <StoriesSection stories={stories} />
         </AppWrapper>
     );

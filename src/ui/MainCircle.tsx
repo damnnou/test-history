@@ -64,58 +64,13 @@ const CircleButtonCategory = styled.label`
     line-height: 30px; /* 150% */
 `;
 
-const MainCircle: React.FC = () => {
-    const [selectedCategory, setSelectedCategory] = useState(0);
-    const [categoriesList, setCategoriesList] = useState(initialCategories);
-
-    const circleRef = useRef<HTMLDivElement | null>(null);
-    const circleButtonRef = useRef<HTMLDivElement | null>(null);
-
-    const handleMove = (id: number) => {
-        // Находим выбранную категорию
-        const category = categoriesList.filter(
-            (category) => category.id === id
-        )[0];
-
-        // Получаем класс из референса кнопки
-        const circleButtonClass =
-            "." + circleButtonRef.current?.className.split(" ")[0];
-
-        // Декларируем начальное/конечное положение в градусах
-        const initialDegree = 60;
-
-        // Вычисляем градус поворота на основе разницы текущего положения и конечного
-        const rotateDegree = category.degree - initialDegree;
-
-        const plusRotate = "+=" + rotateDegree;
-        const minusRotate = "-=" + rotateDegree;
-
-        gsap.to(circleRef.current, {
-            rotation: plusRotate, // поворачиваем круг на вычисленное значение градуса
-            duration: 0.5,
-            ease: Power1.easeInOut,
-        });
-
-        gsap.to(circleButtonClass, {
-            rotation: minusRotate, // поворачиваем внутренности кнопки в противоположную сторону
-            duration: 0.5,
-            ease: Power1.easeInOut,
-        });
-
-        // Устанавливаем итоговые значения в массив категорий
-        setCategoriesList((prevCategories) =>
-            prevCategories.map((cat) => {
-                if (cat.id === category.id) {
-                    return { ...cat, degree: initialDegree };
-                } else {
-                    return { ...cat, degree: cat.degree - rotateDegree };
-                }
-            })
-        );
-        // Устанавливаем выбранную категорию
-        setSelectedCategory(category.id);
-    };
-
+const MainCircle: React.FC = ({
+    categoriesList,
+    onRotate,
+    selectedCategory,
+    circleRef,
+    circleButtonRef,
+}) => {
     return (
         <Cross>
             <Circle ref={circleRef}>
@@ -127,7 +82,14 @@ const MainCircle: React.FC = () => {
                     >
                         <CircleButton
                             animated
-                            onClick={() => handleMove(category.id)}
+                            onClick={() =>
+                                selectedCategory !== category.id &&
+                                onRotate(
+                                    category.id,
+                                    circleRef,
+                                    circleButtonRef
+                                )
+                            }
                             selected={selectedCategory === category.id}
                             value={category.id}
                         />

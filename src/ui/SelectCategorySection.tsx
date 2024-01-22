@@ -27,13 +27,30 @@ const SmallText = styled.p`
     line-height: normal;
 `;
 
-const SelectCategorySection: React.FC = () => {
+const SelectCategorySection: React.FC = ({
+    selectedCategory,
+    onChangeCategory,
+}) => {
     return (
         <Container>
-            <SmallText>06/06</SmallText>
+            <SmallText>
+                {"0"}
+                {selectedCategory}
+                {"/06"}
+            </SmallText>
             <RowContainer>
-                <CircleButton>{"<"}</CircleButton>
-                <CircleButton disabled>{">"}</CircleButton>
+                <CircleButton
+                    disabled={selectedCategory <= 1}
+                    onClick={() => onChangeCategory(selectedCategory - 1)}
+                >
+                    {"<"}
+                </CircleButton>
+                <CircleButton
+                    onClick={() => onChangeCategory(selectedCategory + 1)}
+                    disabled={selectedCategory === 6}
+                >
+                    {">"}
+                </CircleButton>
             </RowContainer>
         </Container>
     );
