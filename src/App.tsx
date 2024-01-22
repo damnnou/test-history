@@ -36,11 +36,12 @@ const App: React.FC = () => {
     const [toYear, setToYear] = useState<number>(1991);
     const [yearsIsLoading, setYearsIsLoading] = useState<boolean>(false);
 
-    // Анимация для подсчета лет
+    // Анимация подсчета лет
     const handleAnimateYears = (from: number, to: number) => {
         if (yearsIsLoading) return;
         setYearsIsLoading(true);
 
+        // Остановка и очистка интервала
         const fastClean = (value: number) => {
             clearInterval(intervalId);
             setYearsIsLoading(false);
@@ -56,10 +57,10 @@ const App: React.FC = () => {
                 if (prev === to) return fastClean(to);
                 return to < prev ? (prev -= 1) : (prev += 1);
             });
-        }, 50);
+        }, 50); // каждые 50 мс обновляется состояние
     };
 
-    // Получаем истории при смене категории
+    // Получение историй при смене категории
     useEffect(() => {
         const category = categoriesList.find(
             (cat) => cat.id === selectedCategory
@@ -67,7 +68,7 @@ const App: React.FC = () => {
         if (category) {
             history.getHistoryByCategory(category.name).then((data) => {
                 setStories(data);
-                const storyYears: number[] = data.map((story) => story.year);
+                const storyYears = data.map((story) => story.year);
                 handleAnimateYears(
                     storyYears[0],
                     storyYears[storyYears.length - 1]
@@ -76,6 +77,7 @@ const App: React.FC = () => {
         } else return;
     }, [selectedCategory]);
 
+    // Выбор категории
     const handleSetCategory = async (id: number) => {
         if (yearsIsLoading) return;
         setYearsIsLoading(true);

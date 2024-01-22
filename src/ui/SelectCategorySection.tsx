@@ -41,12 +41,18 @@ const SelectCategorySection: React.FC = ({
             <RowContainer>
                 <CircleButton
                     disabled={selectedCategory <= 1}
-                    onClick={() => onChangeCategory(selectedCategory - 1)}
+                    onClick={() =>
+                        selectedCategory > 1 &&
+                        onChangeCategory(selectedCategory - 1)
+                    }
                 >
                     {"<"}
                 </CircleButton>
                 <CircleButton
-                    onClick={() => onChangeCategory(selectedCategory + 1)}
+                    onClick={() =>
+                        selectedCategory < 6 &&
+                        onChangeCategory(selectedCategory + 1)
+                    }
                     disabled={selectedCategory === 6}
                 >
                     {">"}
