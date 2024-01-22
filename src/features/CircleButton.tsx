@@ -5,8 +5,8 @@ import type { CircleButtonProps } from "../types/componentsProps.ts";
 
 const Button = styled.div<CircleButtonProps>`
     // Дефолтные стили
-    width: ${(props) => (props.width ? props.width + "px" : "50px")};
-    height: ${(props) => (props.height ? props.height + "px" : "50px")};
+    width: ${(props) => (props.width ?? 50) + "px"};
+    height: ${(props) => (props.height ?? 50) + "px"};
     display: flex;
     align-items: center;
     justify-content: center;

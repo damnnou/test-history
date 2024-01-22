@@ -78,9 +78,10 @@ const App: React.FC = () => {
     }, [selectedCategory]);
 
     // Выбор категории
-    const handleSetCategory = async (id: number) => {
+    const handleCategoryChange = async (id: number) => {
         if (yearsIsLoading) return;
         setYearsIsLoading(true);
+
         // Находим выбранную категорию
         const category = categoriesList.find((cat) => cat.id === id);
 
@@ -134,13 +135,13 @@ const App: React.FC = () => {
                 circleRef={circleRef}
                 circleButtonRef={circleButtonRef}
                 categoriesList={categoriesList}
-                onRotate={handleSetCategory}
+                onRotate={handleCategoryChange}
                 selectedCategory={selectedCategory}
             />
             <MainTitle>Исторические даты</MainTitle>
             <YearsCounter fromYear={fromYear} toYear={toYear} />
             <SelectCategorySection
-                onChangeCategory={handleSetCategory}
+                onChangeCategory={handleCategoryChange}
                 selectedCategory={selectedCategory}
             />
             <StoriesSection stories={stories} />

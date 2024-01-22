@@ -89,6 +89,8 @@ const MainCircle: React.FC = ({
                         style={category.styles}
                     >
                         <CircleButton
+                            width={56}
+                            height={56}
                             animated
                             onClick={() =>
                                 selectedCategory !== category.id &&
