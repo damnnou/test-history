@@ -24,7 +24,7 @@ const AppWrapper = styled.div`
 `;
 
 const App: React.FC = () => {
-    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(2);
     const [categoriesList, setCategoriesList] = useState(initialCategories);
 
     const circleRef = useRef<HTMLDivElement | null>(null);
@@ -32,14 +32,51 @@ const App: React.FC = () => {
 
     const [stories, setStories] = useState<HistoryItem[]>([]);
 
-    const fromYear = 2015;
-    const toYear = 2022;
+    const [fromYear, setFromYear] = useState<number>(1987);
+    const [toYear, setToYear] = useState<number>(1991);
 
+    // Анимация для подсчета лет
+    const handleAnimateYears = (from: number, to: number) => {
+        console.log("going from", from);
+        console.log("going to", to);
+        let countNeeded = fromYear;
+
+        const intervalId = setInterval(() => {
+            setFromYear((prev) => {
+                if (prev === from) {
+                    clearInterval(intervalId);
+                    return from;
+                }
+                return from < prev ? (prev -= 1) : (prev += 1);
+            });
+            setToYear((prev) => {
+                if (prev === to) {
+                    clearInterval(intervalId);
+                    return to;
+                }
+                return to < prev ? (prev -= 1) : (prev += 1);
+            });
+        }, 50);
+    };
+
+    // Получаем истории при смене категории
     useEffect(() => {
-        history.getHistory().then((data) => setStories(data));
-    }, []);
+        const category = categoriesList.find(
+            (cat) => cat.id === selectedCategory
+        );
+        if (category) {
+            history.getHistoryByCategory(category.name).then((data) => {
+                setStories(data);
+                const storyYears: number[] = data.map((story) => story.year);
+                handleAnimateYears(
+                    storyYears[0],
+                    storyYears[storyYears.length - 1]
+                );
+            });
+        } else return;
+    }, [selectedCategory]);
 
-    const handleSetCategory = (id: number) => {
+    const handleSetCategory = async (id: number) => {
         // Находим выбранную категорию
         const category = categoriesList.find((cat) => cat.id === id);
 

@@ -1,9 +1,7 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors.ts";
 import CircleButton from "../features/CircleButton.tsx";
-import gsap, { Power1 } from "gsap";
-import { initialCategories } from "../constants/categories.ts";
 
 const Cross = styled.div`
     &:before {
