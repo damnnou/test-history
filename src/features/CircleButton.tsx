@@ -13,6 +13,7 @@ const Button = styled.div<CircleButtonProps>`
     border-radius: 50%;
     font-size: 20px;
     cursor: pointer;
+    color: ${colors["Black-blue"]};
     border: 1px solid ${colors["Black-blue-Opacity-50"]};
     background-color: #f4f5f9;
     z-index: 1000;

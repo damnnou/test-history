@@ -34,26 +34,26 @@ const App: React.FC = () => {
 
     const [fromYear, setFromYear] = useState<number>(1987);
     const [toYear, setToYear] = useState<number>(1991);
+    const [yearsIsLoading, setYearsIsLoading] = useState<boolean>(false);
 
     // Анимация для подсчета лет
     const handleAnimateYears = (from: number, to: number) => {
-        console.log("going from", from);
-        console.log("going to", to);
-        let countNeeded = fromYear;
+        if (yearsIsLoading) return;
+        setYearsIsLoading(true);
+
+        const fastClean = (value: number) => {
+            clearInterval(intervalId);
+            setYearsIsLoading(false);
+            return value;
+        };
 
         const intervalId = setInterval(() => {
             setFromYear((prev) => {
-                if (prev === from) {
-                    clearInterval(intervalId);
-                    return from;
-                }
+                if (prev === from) return fastClean(from);
                 return from < prev ? (prev -= 1) : (prev += 1);
             });
             setToYear((prev) => {
-                if (prev === to) {
-                    clearInterval(intervalId);
-                    return to;
-                }
+                if (prev === to) return fastClean(to);
                 return to < prev ? (prev -= 1) : (prev += 1);
             });
         }, 50);
@@ -77,6 +77,8 @@ const App: React.FC = () => {
     }, [selectedCategory]);
 
     const handleSetCategory = async (id: number) => {
+        if (yearsIsLoading) return;
+        setYearsIsLoading(true);
         // Находим выбранную категорию
         const category = categoriesList.find((cat) => cat.id === id);
 
@@ -121,6 +123,7 @@ const App: React.FC = () => {
             })
         );
         setSelectedCategory(category.id);
+        setYearsIsLoading(false);
     };
 
     return (

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../styles/colors.ts";
 import CircleButton from "../features/CircleButton.tsx";
 
@@ -50,8 +50,18 @@ const CircleButtonWrapper = styled.div`
     max-height: 56px;
     position: absolute;
 `;
+const anime = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const CircleButtonCategory = styled.label`
+    animation: ${anime} 0.5s;
+    transition: all;
     position: absolute;
     left: calc(56px + 20px);
     top: 50%;
