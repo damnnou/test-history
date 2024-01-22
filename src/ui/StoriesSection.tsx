@@ -20,10 +20,7 @@ const Section = styled.section`
 
 const Eclipse = styled.button<{ visible: boolean }>`
     z-index: 100;
-    display: "flex";
     visibility: ${(props) => (props.visible ? "visible" : "hidden")};
-    align-items: center;
-    justify-content: center;
     margin: auto 0px;
     min-width: 40px;
     min-height: 40px;
@@ -73,7 +70,9 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({ stories }) => {
         <Section>
             <Eclipse onClick={handlePrevClick} visible={prevButton}>
                 <svg
-                    style={{ transform: "scale(-1, 1)" }}
+                    style={{
+                        transform: "scale(-1, 1)",
+                    }}
                     xmlns="http://www.w3.org/2000/svg"
                     width="8"
                     height="12"
@@ -84,6 +83,7 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({ stories }) => {
                 </svg>
             </Eclipse>
             <Swiper
+                style={{}}
                 mousewheel={true}
                 pagination={{
                     clickable: true,
