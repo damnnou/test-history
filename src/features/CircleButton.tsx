@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import type {
-    CircleButtonProps,
-    PartialCircleButtonProps,
-} from "../types/componentsProps";
+import type { PartialCircleButtonProps } from "../types/componentsProps";
 
 const Button = styled.div<PartialCircleButtonProps>`
     // Дефолтные стили
@@ -31,7 +28,7 @@ const Button = styled.div<PartialCircleButtonProps>`
 
     // Стили, если кнопка анимированная
         ${(props) =>
-        props.animated &&
+        props.$animated &&
         `   
             background-color: ${colors["Black-blue"]};
             transform: scale(.1); 

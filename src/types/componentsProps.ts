@@ -20,7 +20,7 @@ interface CircleButtonProps {
     value: string | number;
     degree: number;
     disabled: boolean;
-    animated: boolean;
+    $animated: boolean;
     selected: boolean;
     children: React.ReactNode;
     style: React.CSSProperties;

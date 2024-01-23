@@ -15,10 +15,10 @@ const AppWrapper = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 1440px;
-    height: 100vh;
+    max-width: 1440px;
+    min-height: 100vh;
     margin: 0 auto;
-
+    padding-bottom: 50px;
     border-left: 1px solid ${colors["Black-blue-Opacity-10"]};
     border-right: 1px solid ${colors["Black-blue-Opacity-10"]};
 `;
@@ -56,7 +56,7 @@ const App: React.FC = () => {
                 if (prev === to) return fastClean(to);
                 return to < prev ? (prev -= 1) : (prev += 1);
             });
-        }, 35); // каждые 50 мс обновляется состояние
+        }, 35); // каждые 35 мс обновляется состояние
     };
 
     // Выбор категории
@@ -136,7 +136,7 @@ const App: React.FC = () => {
                     setIsLoading(false);
                 });
         }
-    }, [selectedCategory]);
+    }, [selectedCategory, categoriesList]);
 
     return (
         <AppWrapper>

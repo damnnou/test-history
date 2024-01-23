@@ -24,11 +24,12 @@ const fadeOutSectionAnimation = keyframes`
   }
 `;
 
-const Section = styled.section<{ hidden: boolean }>`
+const Section = styled.section<{ hidden?: boolean }>`
     animation: ${(props) =>
             props.hidden ? fadeOutSectionAnimation : fadeInSectionAnimation}
         0.5s;
     opacity: ${(props) => (props.hidden ? 0 : 1)};
+    visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
     display: flex;
     align-items: center;
     max-width: 1440px;
@@ -39,9 +40,9 @@ const Section = styled.section<{ hidden: boolean }>`
     padding-left: 40px;
 `;
 
-const Eclipse = styled.button<{ visible: boolean }>`
+const Eclipse = styled.button<{ $visible?: boolean }>`
     z-index: 100;
-    visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+    visibility: ${(props) => (props.$visible ? "visible" : "hidden")};
     margin: auto 0px;
     min-width: 40px;
     min-height: 40px;
@@ -60,11 +61,6 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
     const [swiper, setSwiper] = useState<SwiperClass | null>(null);
     const [prevButton, setPrevButton] = useState<boolean>(false);
     const [nextButton, setNextButton] = useState<boolean>(true);
-
-    useEffect(() => {
-        handleReset();
-        handleSlideChange();
-    }, [isLoading]);
 
     const handleSlideChange = () => {
         if (!swiper) return;
@@ -102,11 +98,16 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
         }
     };
 
+    useEffect(() => {
+        handleReset();
+        handleSlideChange();
+    }, [isLoading]);
+
     return (
         <>
-            {stories.length > 0 && !isLoading && (
+            {stories.length > 0 && (
                 <Section hidden={isLoading}>
-                    <Eclipse onClick={handlePrevClick} visible={prevButton}>
+                    <Eclipse onClick={handlePrevClick} $visible={prevButton}>
                         <svg
                             style={{
                                 transform: "scale(-1, 1)",
@@ -148,7 +149,7 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                    <Eclipse onClick={handleNextClick} visible={nextButton}>
+                    <Eclipse onClick={handleNextClick} $visible={nextButton}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="8"

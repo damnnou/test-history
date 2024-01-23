@@ -38,6 +38,8 @@ const Cross = styled.div`
 const Circle = styled.div`
     width: 530px;
     height: 530px;
+    max-width: 530px;
+    max-height: 530px;
     border-radius: 50%;
     border: 1px solid ${colors["Black-blue-Opacity-20"]};
     z-index: 10;
@@ -94,7 +96,7 @@ const MainCircle: React.FC<MainCircleProps> = ({
                         <CircleButton
                             width={56}
                             height={56}
-                            animated
+                            $animated
                             onClick={() =>
                                 selectedCategory !== category.id &&
                                 onRotate(
