@@ -6,13 +6,33 @@ import type { ComponentWithChildren } from "../types/componentsProps";
 const Title = styled.h1`
     @media (max-width: 980px) {
         font-size: 40px;
+        max-width: 280px;
     }
 
     @media (max-width: 860px) {
         padding-left: 40px;
     }
 
+    @media (max-width: 720px) {
+        padding-left: 20px;
+    }
+
+    @media (max-width: 620px) {
+        margin-top: 80px;
+        margin-bottom: auto;
+    }
+
+    @media (max-width: 320px) {
+        margin-top: 60px;
+        font-size: 20px;
+        max-width: 150px;
+        margin-bottom: auto;
+    }
+
     &:before {
+        @media (max-width: 620px) {
+            display: none;
+        }
         position: absolute;
         left: -1px;
         width: 5px;
@@ -25,7 +45,7 @@ const Title = styled.h1`
     position: relative;
     margin-top: 150px;
     padding-left: 80px;
-    max-width: 400px;
+    max-width: 360px;
     height: fit-content;
     color: ${colors["Black-blue"]};
     font-family: "PT Sans";

@@ -3,8 +3,13 @@ import styled, { keyframes } from "styled-components";
 import { colors } from "../styles/colors";
 import CircleButton from "../features/CircleButton";
 import { MainCircleProps } from "../types/componentsProps";
+import { opacityAnimation } from "../styles/animations";
 
 const Cross = styled.div`
+    @media (max-width: 620px) {
+        display: none;
+    }
+
     &:before {
         position: absolute;
         background-color: ${colors["Black-blue-Opacity-10"]};
@@ -15,6 +20,9 @@ const Cross = styled.div`
     }
 
     &:after {
+        @media (max-height: 1080px) {
+            transform: translateY(-80px);
+        }
         pointer-events: none;
         top: 480px;
         position: absolute;
@@ -34,6 +42,9 @@ const Cross = styled.div`
 `;
 
 const Circle = styled.div`
+    @media (max-height: 1080px) {
+        transform: translateY(132px);
+    }
     transform: translateY(215px);
     width: 530px;
     height: 530px;
@@ -60,15 +71,6 @@ const CircleButtonWrapper = styled.div`
             background-color: #f4f5f9;
         }
     }
-`;
-
-const opacityAnimation = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 `;
 
 const CircleButtonLabel = styled.label`

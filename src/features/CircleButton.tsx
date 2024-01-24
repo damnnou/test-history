@@ -4,6 +4,12 @@ import { colors } from "../styles/colors";
 import type { PartialCircleButtonProps } from "../types/componentsProps";
 
 const Button = styled.div<PartialCircleButtonProps>`
+    @media (max-width: 420px) {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+
     // Дефолтные стили
     width: ${(props) => (props.width ?? 50) + "px"};
     height: ${(props) => (props.height ?? 50) + "px"};

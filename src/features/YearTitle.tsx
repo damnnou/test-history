@@ -11,9 +11,53 @@ const Year = styled.h1<YearTitleProps>`
         font-size: 150px;
     }
 
+    @media (max-width: 720px) {
+        font-size: 140px;
+    }
+
+    @media (max-width: 660px) {
+        font-size: 130px;
+    }
+
+    @media (max-width: 620px) {
+        font-size: 120px;
+    }
+
+    @media (max-width: 580px) {
+        font-size: 110px;
+    }
+
+    @media (max-width: 520px) {
+        font-size: 100px;
+    }
+
+    @media (max-width: 480px) {
+        font-size: 90px;
+    }
+
+    @media (max-width: 440px) {
+        font-size: 80px;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 70px;
+    }
+
+    @media (max-width: 380px) {
+        font-size: 60px;
+    }
+
+    @media (max-width: 320px) {
+        font-size: 56px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -1.12px;
+    }
+
     color: ${(props) => props.color ?? "#5D5FEF"};
 
-    margin: 0 0;
+    margin: 56px 0;
     height: fit-content;
     width: fit-content;
     text-align: center;
@@ -21,7 +65,6 @@ const Year = styled.h1<YearTitleProps>`
     font-size: 200px;
     font-style: normal;
     font-weight: 700;
-    line-height: 160px; /* 80% */
     letter-spacing: -4px;
 `;
 

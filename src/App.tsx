@@ -10,6 +10,7 @@ import history from "./api/history";
 import { initialCategories } from "./constants/categories";
 import type { HistoryItem } from "./types/variablesProps";
 import gsap, { Power1 } from "gsap";
+import { opacityAnimation } from "./styles/animations";
 
 const AppWrapper = styled.div`
     position: relative;
@@ -18,14 +19,47 @@ const AppWrapper = styled.div`
     max-width: 1440px;
     min-height: 100vh;
     margin: 0 auto;
-    padding-bottom: 50px;
     border-left: 1px solid ${colors["Black-blue-Opacity-10"]};
     border-right: 1px solid ${colors["Black-blue-Opacity-10"]};
+    box-sizing: border-box;
+`;
+
+const StyledHr = styled.hr`
+    @media (max-width: 620px) {
+        display: block;
+        animation: ${opacityAnimation} 1s;
+        order: 3;
+        width: calc(100% - 40px);
+        background-color: #c7cdd9;
+        margin-bottom: 20px;
+    }
+
+    display: none;
+`;
+
+const CategoryName = styled.p`
+    @media (max-width: 620px) {
+        display: block;
+        margin-left: 20px;
+        margin-top: auto;
+        margin-bottom: 20px;
+        order: 2;
+        animation: ${opacityAnimation} 1s;
+        color: ${colors["Black-blue"]};
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 30px; /* 150% */
+    }
+
+    display: none;
 `;
 
 const App: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<number>(2);
     const [categoriesList, setCategoriesList] = useState(initialCategories);
+    const categoryName = categoriesList.find(
+        (category) => selectedCategory === category.id
+    )?.name;
 
     const circleRef = useRef<HTMLDivElement | null>(null);
     const circleButtonRef = useRef<HTMLDivElement | null>(null);
@@ -154,6 +188,12 @@ const App: React.FC = () => {
                 onChangeCategory={handleCategoryChange}
                 selectedCategory={selectedCategory}
             />
+            {!isLoading && categoryName && (
+                <>
+                    <StyledHr />
+                    <CategoryName>{categoryName}</CategoryName>
+                </>
+            )}
             <StoriesSection isLoading={isLoading} stories={stories} />
         </AppWrapper>
     );

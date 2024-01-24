@@ -1,34 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Story from "../features/Story";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { colors } from "../styles/colors";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
 import type { StoriesSectionProps } from "../types/componentsProps";
-
-const fadeInSectionAnimation = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-const fadeOutSectionAnimation = keyframes`
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
+import {
+    fadeInSectionAnimation,
+    fadeOutSectionAnimation,
+} from "../styles/animations";
 
 const Section = styled.section<{ hidden?: boolean }>`
     @media (max-width: 980px) {
         padding-right: 0px;
         padding-left: 0px;
     }
+
+    @media (max-width: 620px) {
+        order: 3;
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+
     animation: ${(props) =>
             props.hidden ? fadeOutSectionAnimation : fadeInSectionAnimation}
         0.5s;
@@ -41,6 +34,7 @@ const Section = styled.section<{ hidden?: boolean }>`
     overflow: hidden;
     justify-content: center;
     margin-top: 56px;
+    margin-bottom: 50px;
     padding-right: 40px;
     padding-left: 40px;
 `;
@@ -149,6 +143,10 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
 
                             620: {
                                 slidesPerView: 2,
+                            },
+
+                            100: {
+                                slidesPerView: 1.5,
                             },
                         }}
                     >
