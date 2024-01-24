@@ -17,11 +17,15 @@ const Button = styled.div<PartialCircleButtonProps>`
     border: 1px solid ${colors["Black-blue-Opacity-50"]};
     background-color: #f4f5f9;
     z-index: 1000;
+    transition: all ease-in-out 0.35s;
+    &:hover {
+        transform: scale(1);
+        background-color: #f4f5f9;
+    }
 
     ${(props) =>
         !props.disabled &&
         `
-        transition: all ease-in-out 0.35s;
         &:hover {
         background-color: #fff;
     }`}
@@ -32,12 +36,6 @@ const Button = styled.div<PartialCircleButtonProps>`
         `   
             background-color: ${colors["Black-blue"]};
             transform: scale(.1); 
-            transition: all ease-in-out 0.35s;
-
-            &:hover {
-                transform: scale(1);
-                background-color: #f4f5f9;
-            };
     `}
 
     // Стили, если кнопка выбрана
@@ -58,6 +56,7 @@ const Button = styled.div<PartialCircleButtonProps>`
             color: ${colors["Black-blue"]}
     }`}
 `;
+
 const CircleButton: React.FC<PartialCircleButtonProps> = ({
     children,
     reference,

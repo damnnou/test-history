@@ -126,7 +126,7 @@ const App: React.FC = () => {
         );
 
         if (category) {
-            console.log("fetching data...");
+            console.log("fetching stories...");
             history
                 .getHistoryByCategory(category.name)
                 .then((data) => {

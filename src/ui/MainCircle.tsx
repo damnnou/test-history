@@ -52,6 +52,15 @@ const CircleButtonWrapper = styled.div`
     max-width: 56px;
     max-height: 56px;
     position: absolute;
+
+    // Анимация для кнопки
+    &:hover {
+        cursor: pointer;
+        div {
+            transform: scale(1);
+            background-color: #f4f5f9;
+        }
+    }
 `;
 
 const opacityAnimation = keyframes`
@@ -63,7 +72,7 @@ const opacityAnimation = keyframes`
   }
 `;
 
-const CircleButtonCategory = styled.label`
+const CircleButtonLabel = styled.label`
     animation: ${opacityAnimation} 1s;
     transition: all;
     position: absolute;
@@ -109,9 +118,9 @@ const MainCircle: React.FC<MainCircleProps> = ({
                             value={category.id}
                         />
                         {!isLoading && selectedCategory === category.id && (
-                            <CircleButtonCategory>
+                            <CircleButtonLabel>
                                 {category.name}
-                            </CircleButtonCategory>
+                            </CircleButtonLabel>
                         )}
                     </CircleButtonWrapper>
                 ))}

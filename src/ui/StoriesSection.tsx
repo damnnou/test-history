@@ -101,7 +101,7 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
     useEffect(() => {
         handleReset();
         handleSlideChange();
-    }, [isLoading]);
+    }, [stories]);
 
     return (
         <>
