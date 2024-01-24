@@ -4,12 +4,15 @@ import CircleButton from "../features/CircleButton";
 import { SelectCategorySectionProps } from "../types/componentsProps";
 
 const Container = styled.div`
+    @media (max-width: 860px) {
+        margin-left: 40px;
+    }
+
     display: flex;
     flex-direction: column;
     margin-top: 393px;
     margin-left: 80px;
     gap: 10px;
-
     width: fit-content;
     height: fit-content;
 `;

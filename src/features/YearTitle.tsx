@@ -3,6 +3,14 @@ import styled from "styled-components";
 import type { YearTitleProps } from "../types/componentsProps";
 
 const Year = styled.h1<YearTitleProps>`
+    @media (max-width: 980px) {
+        font-size: 180px;
+    }
+
+    @media (max-width: 860px) {
+        font-size: 150px;
+    }
+
     color: ${(props) => props.color ?? "#5D5FEF"};
 
     margin: 0 0;

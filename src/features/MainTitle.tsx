@@ -4,6 +4,14 @@ import { colors } from "../styles/colors";
 import type { ComponentWithChildren } from "../types/componentsProps";
 
 const Title = styled.h1`
+    @media (max-width: 980px) {
+        font-size: 40px;
+    }
+
+    @media (max-width: 860px) {
+        padding-left: 40px;
+    }
+
     &:before {
         position: absolute;
         left: -1px;
@@ -13,7 +21,7 @@ const Title = styled.h1`
         content: "";
     }
 
-    z-index: 100;
+    pointer-events: none;
     position: relative;
     margin-top: 150px;
     padding-left: 80px;

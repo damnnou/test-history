@@ -5,6 +5,10 @@ import { colors } from "../styles/colors";
 import type { YearsCounterProps } from "../types/componentsProps";
 
 const StyledContainer = styled.div`
+    @media (max-width: 980px) {
+        gap: 50px;
+    }
+
     display: flex;
     position: absolute;
     width: fit-content;

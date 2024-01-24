@@ -25,6 +25,10 @@ const fadeOutSectionAnimation = keyframes`
 `;
 
 const Section = styled.section<{ hidden?: boolean }>`
+    @media (max-width: 980px) {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
     animation: ${(props) =>
             props.hidden ? fadeOutSectionAnimation : fadeInSectionAnimation}
         0.5s;
@@ -33,17 +37,21 @@ const Section = styled.section<{ hidden?: boolean }>`
     display: flex;
     align-items: center;
     max-width: 1440px;
+    height: fit-content;
     overflow: hidden;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 56px;
     padding-right: 40px;
     padding-left: 40px;
 `;
 
 const Eclipse = styled.button<{ $visible?: boolean }>`
+    @media (max-width: 980px) {
+        display: none;
+    }
     z-index: 100;
     visibility: ${(props) => (props.$visible ? "visible" : "hidden")};
-    margin: auto 0px;
+    margin: auto auto;
     min-width: 40px;
     min-height: 40px;
     cursor: pointer;
@@ -126,16 +134,23 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
                         </svg>
                     </Eclipse>
                     <Swiper
-                        style={{}}
                         mousewheel={true}
                         pagination={{
                             clickable: true,
                         }}
                         modules={[Mousewheel, Pagination]}
-                        slidesPerView={3}
                         spaceBetween={40}
                         onSwiper={setSwiper}
                         onSlideChange={handleSlideChange}
+                        breakpoints={{
+                            1280: {
+                                slidesPerView: 3,
+                            },
+
+                            620: {
+                                slidesPerView: 2,
+                            },
+                        }}
                     >
                         {stories.map((slideContent, index) => (
                             <SwiperSlide

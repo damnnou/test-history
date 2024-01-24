@@ -8,34 +8,33 @@ const Cross = styled.div`
     &:before {
         position: absolute;
         background-color: ${colors["Black-blue-Opacity-10"]};
-        top: -216px;
-        left: 50%;
-        right: 50%;
         width: 1px;
-        height: 100vh;
+        height: 100%;
         content: "";
+        pointer-events: none;
     }
 
     &:after {
+        pointer-events: none;
+        top: 480px;
         position: absolute;
         background-color: ${colors["Black-blue-Opacity-10"]};
-        top: 50%;
-        bottom: 50%;
-        left: 50%;
-        transform: translateX(-50%);
         height: 1px;
-        width: 1440px;
+        width: 100%;
         content: "";
     }
 
+    pointer-events: auto;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 215px;
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
     z-index: 0;
 `;
 
 const Circle = styled.div`
+    transform: translateY(215px);
     width: 530px;
     height: 530px;
     max-width: 530px;
@@ -48,7 +47,7 @@ const Circle = styled.div`
 const CircleButtonWrapper = styled.div`
     display: flex;
     gap: 20px;
-    z-index: 100;
+    z-index: 1000;
     max-width: 56px;
     max-height: 56px;
     position: absolute;
