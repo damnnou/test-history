@@ -74,7 +74,7 @@ const SelectCategorySection: React.FC<SelectCategorySectionProps> = ({
                         <path
                             d="M13.7489 10.0418L10.6239 13.1668L13.7489 16.2918"
                             stroke="#42567A"
-                            stroke-width="2"
+                            strokeWidth="2"
                         />
                     </svg>
                 </CircleButton>
@@ -95,7 +95,7 @@ const SelectCategorySection: React.FC<SelectCategorySectionProps> = ({
                         <path
                             d="M11.5839 10.0418L14.7089 13.1668L11.5839 16.2918"
                             stroke="#42567A"
-                            stroke-width="2"
+                            strokeWidth="2"
                         />
                     </svg>
                 </CircleButton>

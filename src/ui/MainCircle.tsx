@@ -20,9 +20,6 @@ const Cross = styled.div`
     }
 
     &:after {
-        @media (max-height: 1080px) {
-            transform: translateY(-80px);
-        }
         pointer-events: none;
         top: 480px;
         position: absolute;
@@ -42,9 +39,6 @@ const Cross = styled.div`
 `;
 
 const Circle = styled.div`
-    @media (max-height: 1080px) {
-        transform: translateY(132px);
-    }
     transform: translateY(215px);
     width: 530px;
     height: 530px;
@@ -52,7 +46,7 @@ const Circle = styled.div`
     max-height: 530px;
     border-radius: 50%;
     border: 1px solid ${colors["Black-blue-Opacity-20"]};
-    z-index: 10;
+    z-index: 20;
 `;
 
 const CircleButtonWrapper = styled.div`

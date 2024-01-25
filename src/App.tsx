@@ -10,7 +10,11 @@ import history from "./api/history";
 import { initialCategories } from "./constants/categories";
 import type { HistoryItem } from "./types/variablesProps";
 import gsap, { Power1 } from "gsap";
-import { opacityAnimation } from "./styles/animations";
+import {
+    fadeInSectionAnimation,
+    fadeOutSectionAnimation,
+    opacityAnimation,
+} from "./styles/animations";
 
 const AppWrapper = styled.div`
     position: relative;
@@ -24,34 +28,30 @@ const AppWrapper = styled.div`
     box-sizing: border-box;
 `;
 
-const StyledHr = styled.hr`
+const CategoryWrapper = styled.div<{ hidden?: boolean }>`
     @media (max-width: 620px) {
-        display: block;
-        animation: ${opacityAnimation} 1s;
+        animation: ${(props) =>
+                props.hidden ? fadeOutSectionAnimation : fadeInSectionAnimation}
+            0.5s;
+        visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
+        display: flex;
+        flex-direction: column;
         order: 3;
-        width: calc(100% - 40px);
-        background-color: #c7cdd9;
         margin-bottom: 20px;
+        margin: 20px;
     }
-
     display: none;
 `;
 
-const CategoryName = styled.p`
-    @media (max-width: 620px) {
-        display: block;
-        margin-left: 20px;
-        margin-top: auto;
-        margin-bottom: 20px;
-        order: 2;
-        animation: ${opacityAnimation} 1s;
-        color: ${colors["Black-blue"]};
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 30px; /* 150% */
-    }
+const StyledHr = styled.hr`
+    width: 100%;
+    background-color: #c7cdd9;
+`;
 
-    display: none;
+const CategoryName = styled.p`
+    color: ${colors["Black-blue"]};
+    font-size: 14px;
+    font-weight: 700;
 `;
 
 const App: React.FC = () => {
@@ -188,11 +188,11 @@ const App: React.FC = () => {
                 onChangeCategory={handleCategoryChange}
                 selectedCategory={selectedCategory}
             />
-            {!isLoading && categoryName && (
-                <>
-                    <StyledHr />
+            {categoryName && (
+                <CategoryWrapper hidden={isLoading}>
                     <CategoryName>{categoryName}</CategoryName>
-                </>
+                    <StyledHr />
+                </CategoryWrapper>
             )}
             <StoriesSection isLoading={isLoading} stories={stories} />
         </AppWrapper>

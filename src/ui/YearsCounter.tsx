@@ -25,11 +25,11 @@ const StyledContainer = styled.div`
     position: absolute;
     width: fit-content;
     height: fit-content;
-    top: 400px;
+    top: 470px;
     gap: 100px;
     left: 50%;
-    transform: translateX(-50%);
-    z-index: -10;
+    transform: translate(-50%, -50%);
+    z-index: 10;
     pointer-events: none;
     cursor: default;
 `;

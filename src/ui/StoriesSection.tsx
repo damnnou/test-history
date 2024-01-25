@@ -44,6 +44,7 @@ const Eclipse = styled.button<{ $visible?: boolean }>`
         display: none;
     }
     z-index: 100;
+
     visibility: ${(props) => (props.$visible ? "visible" : "hidden")};
     margin: auto auto;
     min-width: 40px;
@@ -67,7 +68,7 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
     const handleSlideChange = () => {
         if (!swiper) return;
         const activeIndex = swiper.activeIndex;
-        const slidesPerView = 3;
+        const slidesPerView = swiper.slidesPerViewDynamic();
 
         if (activeIndex + slidesPerView === stories.length) {
             setNextButton(false);

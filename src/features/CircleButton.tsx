@@ -58,8 +58,7 @@ const Button = styled.div<PartialCircleButtonProps>`
         props.disabled &&
         `background-color: #f4f5f9;
             cursor: default;
-            border: 1px solid ${colors["Black-blue-Opacity-20"]};
-            color: ${colors["Black-blue"]}
+            opacity: 0.50;
     }`}
 `;
 
