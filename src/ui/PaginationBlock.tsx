@@ -16,12 +16,12 @@ const PaginationBlockWrapper = styled.div`
     display: none;
 `;
 
-const PaginationDot = styled.div<{ active?: boolean }>`
+const PaginationDot = styled.div<{ $active?: boolean }>`
     width: 6px;
     height: 6px;
     margin: 0 5px;
     background-color: ${(props) =>
-        props.active ? colors["Black-blue"] : "#C4C4C4"};
+        props.$active ? colors["Black-blue"] : "#C4C4C4"};
     border-radius: 50%;
     cursor: pointer;
     transition: all ease-in-out 0.35s;
@@ -45,7 +45,7 @@ const PaginationBlock: React.FC<StoriesSectionProps> = ({
             {stories.map((slideContent, index) => (
                 <PaginationDot
                     key={slideContent.id}
-                    active={swiperActiveIndex === index}
+                    $active={swiperActiveIndex === index}
                     onClick={() => handleMoveTo(index)}
                 />
             ))}
