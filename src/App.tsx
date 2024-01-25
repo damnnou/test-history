@@ -15,6 +15,8 @@ import {
     fadeOutSectionAnimation,
     opacityAnimation,
 } from "./styles/animations";
+import { SwiperClass } from "swiper/react";
+import PaginationBlock from "./ui/PaginationBlock";
 
 const AppWrapper = styled.div`
     position: relative;
@@ -55,6 +57,8 @@ const CategoryName = styled.p`
 `;
 
 const App: React.FC = () => {
+    const [swiper, setSwiper] = useState<SwiperClass | null>(null);
+
     const [selectedCategory, setSelectedCategory] = useState<number>(2);
     const [categoriesList, setCategoriesList] = useState(initialCategories);
     const categoryName = categoriesList.find(
@@ -194,7 +198,17 @@ const App: React.FC = () => {
                     <StyledHr />
                 </CategoryWrapper>
             )}
-            <StoriesSection isLoading={isLoading} stories={stories} />
+            <StoriesSection
+                swiper={swiper}
+                setSwiper={setSwiper}
+                isLoading={isLoading}
+                stories={stories}
+            />
+            <PaginationBlock
+                swiper={swiper}
+                setSwiper={setSwiper}
+                stories={stories}
+            />
         </AppWrapper>
     );
 };

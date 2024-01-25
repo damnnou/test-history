@@ -55,8 +55,14 @@ const Year = styled.h1<YearTitleProps>`
         letter-spacing: -1.12px;
     }
 
+    @media (max-height: 720px) {
+        margin-top: 26px;
+        margin-bottom: 0px;
+    }
+
     color: ${(props) => props.color ?? "#5D5FEF"};
 
+    transition: ease-in-out 0.35s;
     margin: 56px 0;
     height: fit-content;
     width: fit-content;

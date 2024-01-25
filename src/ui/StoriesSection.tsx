@@ -60,8 +60,9 @@ const Eclipse = styled.button<{ $visible?: boolean }>`
 const StoriesSection: React.FC<StoriesSectionProps> = ({
     isLoading,
     stories,
+    swiper,
+    setSwiper,
 }) => {
-    const [swiper, setSwiper] = useState<SwiperClass | null>(null);
     const [prevButton, setPrevButton] = useState<boolean>(false);
     const [nextButton, setNextButton] = useState<boolean>(true);
 
@@ -130,9 +131,7 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
                     </Eclipse>
                     <Swiper
                         mousewheel={true}
-                        pagination={{
-                            clickable: true,
-                        }}
+                        pagination={true}
                         modules={[Mousewheel, Pagination]}
                         spaceBetween={40}
                         onSwiper={setSwiper}

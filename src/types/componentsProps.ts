@@ -1,5 +1,6 @@
 import { Ref, RefObject } from "react";
 import type { HistoryItem, CategoryObject } from "./variablesProps";
+import { SwiperClass } from "swiper/react";
 
 interface MainCircleProps {
     isLoading: boolean;
@@ -56,7 +57,9 @@ interface ComponentWithChildren {
 
 interface StoriesSectionProps {
     stories: HistoryItem[];
-    isLoading: boolean;
+    isLoading?: boolean;
+    swiper: SwiperClass | null;
+    setSwiper: React.Dispatch<React.SetStateAction<SwiperClass | null>>;
 }
 
 export type {

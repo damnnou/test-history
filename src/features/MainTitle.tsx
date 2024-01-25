@@ -18,13 +18,17 @@ const Title = styled.h1`
     }
 
     @media (max-width: 620px) {
-        margin-top: 80px;
+        margin-top: 60px;
         margin-bottom: auto;
+    }
+
+    @media (max-width: 460px) {
+        font-size: 20px;
+        max-width: 140px;
     }
 
     @media (max-width: 320px) {
         margin-top: 60px;
-        font-size: 20px;
         max-width: 150px;
         margin-bottom: auto;
     }
@@ -41,6 +45,7 @@ const Title = styled.h1`
         content: "";
     }
 
+    transition: ease-in-out 0.35s;
     pointer-events: none;
     position: relative;
     margin-top: 150px;
