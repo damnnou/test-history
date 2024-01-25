@@ -285,4 +285,5 @@ const getHistoryByCategory = (categoryName: string) => {
     });
 };
 
-export default { getAllHistory, history, getHistoryByCategory };
+// eslint-disable-next-line
+export default { history, getAllHistory, getHistoryByCategory };

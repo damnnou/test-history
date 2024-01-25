@@ -108,6 +108,7 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
     useEffect(() => {
         handleReset();
         handleSlideChange();
+        // eslint-disable-next-line
     }, [stories]);
 
     return (
