@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Story from "../features/Story";
 import styled from "styled-components";
 import { colors } from "../styles/colors";
-import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
 import type { StoriesSectionProps } from "../types/componentsProps";
 import {
@@ -16,7 +16,7 @@ const Section = styled.section<{ hidden?: boolean }>`
         padding-left: 0px;
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 820px) {
         order: 3;
         margin-top: 20px;
         margin-bottom: 0;

@@ -13,7 +13,6 @@ import gsap, { Power1 } from "gsap";
 import {
     fadeInSectionAnimation,
     fadeOutSectionAnimation,
-    opacityAnimation,
 } from "./styles/animations";
 import { SwiperClass } from "swiper/react";
 import PaginationBlock from "./ui/PaginationBlock";
@@ -31,7 +30,7 @@ const AppWrapper = styled.div`
 `;
 
 const CategoryWrapper = styled.div<{ hidden?: boolean }>`
-    @media (max-width: 620px) {
+    @media (max-width: 820px) {
         animation: ${(props) =>
                 props.hidden ? fadeOutSectionAnimation : fadeInSectionAnimation}
             0.5s;
@@ -40,8 +39,12 @@ const CategoryWrapper = styled.div<{ hidden?: boolean }>`
         flex-direction: column;
         order: 3;
         margin-bottom: 20px;
+        margin: 40px;
+    }
+    @media (max-width: 720px) {
         margin: 20px;
     }
+
     display: none;
 `;
 
@@ -155,6 +158,7 @@ const App: React.FC = () => {
         if (isLoading) return;
         const storyYears = stories.map((story) => story.year);
         handleAnimateYears(storyYears[0], storyYears[storyYears.length - 1]);
+        // eslint-disable-next-line
     }, [stories]);
 
     // Получение историй при смене категории
@@ -175,6 +179,7 @@ const App: React.FC = () => {
                     setIsLoading(false);
                 });
         }
+        // eslint-disable-next-line
     }, [selectedCategory, categoriesList]);
 
     return (

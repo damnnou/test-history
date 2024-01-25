@@ -5,18 +5,15 @@ import { colors } from "../styles/colors";
 import type { YearsCounterProps } from "../types/componentsProps";
 
 const StyledContainer = styled.div`
-    @media (max-width: 620px) {
+    @media (max-width: 820px) {
         position: static;
         margin: 0 auto;
         transform: translateX(0);
         order: 2;
     }
 
-    @media (max-width: 980px) {
-        gap: 50px;
-    }
-
-    @media (max-width: 420px) {
+    @media (max-width: 720px) {
+        justify-content: space-between;
         gap: 40px;
     }
 
@@ -26,10 +23,10 @@ const StyledContainer = styled.div`
     width: fit-content;
     height: fit-content;
     top: 470px;
-    gap: 100px;
+    gap: calc(10px + (min(5vw, 40px)));
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
+    z-index: -10;
     pointer-events: none;
     cursor: default;
 `;

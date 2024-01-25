@@ -1,12 +1,12 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { colors } from "../styles/colors";
 import CircleButton from "../features/CircleButton";
 import { MainCircleProps } from "../types/componentsProps";
 import { opacityAnimation } from "../styles/animations";
 
 const Cross = styled.div`
-    @media (max-width: 620px) {
+    @media (max-width: 820px) {
         display: none;
     }
 

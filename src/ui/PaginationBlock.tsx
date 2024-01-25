@@ -4,13 +4,16 @@ import { StoriesSectionProps } from "../types/componentsProps";
 import { colors } from "../styles/colors";
 
 const PaginationBlockWrapper = styled.div`
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    @media (max-width: 820px) {
+        position: absolute;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    display: none;
 `;
 
 const PaginationDot = styled.div<{ active?: boolean }>`

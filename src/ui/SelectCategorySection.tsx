@@ -12,7 +12,7 @@ const Container = styled.div`
         margin-left: 20px;
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 820px) {
         order: 4;
         margin-top: auto;
         margin-bottom: 20px;
