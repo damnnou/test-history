@@ -58,6 +58,7 @@ const CategoryName = styled.p`
 
 const App: React.FC = () => {
     const [swiper, setSwiper] = useState<SwiperClass | null>(null);
+    const [swiperActiveIndex, setSwiperActiveIndex] = useState<number>(0);
 
     const [selectedCategory, setSelectedCategory] = useState<number>(2);
     const [categoriesList, setCategoriesList] = useState(initialCategories);
@@ -203,8 +204,11 @@ const App: React.FC = () => {
                 setSwiper={setSwiper}
                 isLoading={isLoading}
                 stories={stories}
+                setSwiperActiveIndex={setSwiperActiveIndex}
             />
             <PaginationBlock
+                setSwiperActiveIndex={setSwiperActiveIndex}
+                swiperActiveIndex={swiperActiveIndex}
                 swiper={swiper}
                 setSwiper={setSwiper}
                 stories={stories}

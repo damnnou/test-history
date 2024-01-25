@@ -27,13 +27,13 @@ const PaginationDot = styled.div<{ active?: boolean }>`
 const PaginationBlock: React.FC<StoriesSectionProps> = ({
     swiper,
     stories,
+    swiperActiveIndex,
+    setSwiperActiveIndex,
 }) => {
-    const [activeIndex, setActiveIndex] = React.useState(0);
-
     const handleMoveTo = (index: number) => {
         if (swiper) {
             swiper.slideTo(index);
-            setActiveIndex(swiper.activeIndex);
+            setSwiperActiveIndex(swiper.activeIndex);
         }
     };
 
@@ -42,7 +42,7 @@ const PaginationBlock: React.FC<StoriesSectionProps> = ({
             {stories.map((slideContent, index) => (
                 <PaginationDot
                     key={slideContent.id}
-                    active={activeIndex === index}
+                    active={swiperActiveIndex === index}
                     onClick={() => handleMoveTo(index)}
                 />
             ))}

@@ -62,6 +62,7 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
     stories,
     swiper,
     setSwiper,
+    setSwiperActiveIndex,
 }) => {
     const [prevButton, setPrevButton] = useState<boolean>(false);
     const [nextButton, setNextButton] = useState<boolean>(true);
@@ -82,6 +83,8 @@ const StoriesSection: React.FC<StoriesSectionProps> = ({
         } else {
             setPrevButton(false);
         }
+
+        setSwiperActiveIndex(activeIndex);
     };
 
     const handleReset = () => {

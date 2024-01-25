@@ -60,6 +60,8 @@ interface StoriesSectionProps {
     isLoading?: boolean;
     swiper: SwiperClass | null;
     setSwiper: React.Dispatch<React.SetStateAction<SwiperClass | null>>;
+    swiperActiveIndex?: number;
+    setSwiperActiveIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export type {
